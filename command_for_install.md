@@ -1,4 +1,7 @@
-1.
+    cd ./frontend
+    npm install
+
+hoặc nhập chuỗi command
     cd ./frontend
     npm i webpack webpack-cli --save-dev
     npm i @babel/core babel-loader @babel/preset-env @babel/preset-react --save-dev
