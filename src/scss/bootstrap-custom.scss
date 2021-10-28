@@ -1,0 +1,47 @@
+$theme-colors: (
+  "primary": #FFD53B,
+  "secondary": #211931,
+  "success": #4B8227,
+  "danger": #E74C3C,
+  "info": #89AFB2
+);
+
+@import '~bootstrap/scss/bootstrap.scss';
+
+// .btn-primary {
+//     @include button-variant($color-primary-yellow, $color-primary-yellow, $color-primary-dark-blue);
+// }
+// .btn-secondary {
+//     @include button-variant($color-primary-dark-blue, $color-primary-dark-blue, $color-neutral-white);
+// }
+
+// a {
+//     text-decoration: none;
+// }
+
+// h1 {
+//     font-weight: bold;
+//     font-size: calc(1.5rem + 1.5vw);
+// }
+
+// h2 {
+//     font-style: normal;
+//     font-weight: bold;
+//     font-size: calc(1.2rem + 1vw);
+// }
+
+// h3 {
+//     font-style: normal;
+//     font-weight: bold;
+//     font-size: calc(1rem + 0.6vw);
+// }
+
+// h4 {
+//     font-style: normal;
+//     font-weight: bold;
+//     font-size: calc(0.75rem + 0.3vw);
+//     text-decoration: none;
+// }
+
+
+
