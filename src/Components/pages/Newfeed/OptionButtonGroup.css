@@ -1,0 +1,10 @@
+.btn.btn-primary{
+    background-color: #CBCFC7;
+    border: none;
+    color: #211931;
+    margin-right: 44px;
+}
+
+.row label{
+    font-size: 20px;
+}
