@@ -3,7 +3,7 @@ import { useTable, usePagination } from 'react-table'
 import MOCK_DATA from './MOCK_DATA.json'
 import { COLUMNS } from './columns'
 import './table.css'
-import Button from '../Button/Button'
+import Button from '../accInt/Button'
 
 export const PaginationTable = () => {
   const columns = useMemo(() => COLUMNS, [])
@@ -33,7 +33,7 @@ export const PaginationTable = () => {
     usePagination
   )
 
-  const { pageIndex, pageSize } = state
+  const { pageIndex } = state
 
   return (
     <div style={{ textAlign: "center", width: "1200px" }}>
