@@ -14,6 +14,8 @@ import {
 import { UserInfo } from './components/pages/UserInfo/UserInfo';
 import { TopBar } from './components/TopBar';
 import { OrderHistory } from './components/pages/OrderHistory/OrderHistory';
+import { OrderInfo } from './components/pages/OrderInfo/OrderInfo';
+import { orderData } from './data';
 
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
                             </Route>
                             <Route path="/account/user-info" exact component={UserInfo} />
                             <Route path="/account/order-history" exact component={OrderHistory} />
+                            <Route path="/account/order-info/:id" exact component={OrderInfo} />
                         </Switch>
                     </div>
                 </div>
