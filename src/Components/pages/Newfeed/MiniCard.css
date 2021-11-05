@@ -1,0 +1,10 @@
+.card{
+    width: fit-content;
+    height: fit-content;
+    border-color: black;
+    border-radius: 12px;
+}
+
+.card.card-text{
+    color: var(--submaintext);
+}

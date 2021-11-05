@@ -1,0 +1,20 @@
+.status-text {
+    color: var(--color-status-green);
+}
+
+
+.card{
+    width: 450px;
+    /* flex: 0 0; */
+    
+}
+.card-title-search{
+    color: black;
+}
+
+.parking-card-img{
+    width: fit-content;
+    /* flex: 0 0; */
+}
+
+
