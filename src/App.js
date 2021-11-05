@@ -18,6 +18,7 @@ import { OrderInfo } from './components/pages/OrderInfo/OrderInfo';
 import { orderData } from './data';
 import { Cart } from './components/pages/Cart/Cart';
 import { Account } from './components/pages/Account/Account';
+import { CartItemDetail } from './components/pages/CartItemDetail/CartItemDetail';
 
 
 function App() {
@@ -28,25 +29,13 @@ function App() {
                 <div class="row px-2 sticky-top">
                     <TopBar />
                 </div>
-                <div class="row h-100">
+                <div class="row h-100 p-3">
                     <Switch>
                         <Route exact path="/cart" component={Cart}/>
+                        <Route exact path="/cart-item-detail" component={CartItemDetail}/>
                         <Route path="/account" component={Account}/>
                     </Switch>
 
-                    {/* <div class="col-auto">
-                        <Sidebar path={window.location.pathname == "/account" ? "/account/user-info" : window.location.pathname}/>
-                    </div>
-                    <div class="col">
-                        <Switch>
-                            <Route exact path="/account">
-                                <Redirect to="/account/user-info" />
-                            </Route>
-                            <Route path="/account/user-info" exact component={UserInfo} />
-                            <Route path="/account/order-history" exact component={OrderHistory} />
-                            <Route path="/account/order-info/:id" exact component={OrderInfo} />
-                        </Switch>
-                    </div> */}
                 </div>
             </div>
         </Router>

@@ -55,7 +55,7 @@ export function OrderInfo() {
 
     return(
         <div class="container">
-            <h2 class="my-3">Thông tin đơn hàng #{padLeadingZeros(order.id, 9)}</h2>
+            <h3 class="my-3">Thông tin đơn hàng #{padLeadingZeros(order.id, 9)}</h3>
             <div class="row mx-auto">
                 <div class="col">
                     <div class="row mx-auto">

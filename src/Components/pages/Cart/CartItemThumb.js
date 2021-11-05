@@ -1,6 +1,6 @@
 import { getOrderTotalPrice, countVehicles, vehiclesToString } from '../../../utils/OrderUtils';
 
-export function CartItem({cartItem}) {
+export function CartItemThumb({cartItem}) {
     return(
         <div class="container">
             <div class="row justify-content-center">

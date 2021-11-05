@@ -8,7 +8,7 @@ export function OrderHistory() {
     const ORDER_LIST = orderData;
     return(
         <div class="order-history-content container">
-            <h2 class="my-3">Lịch sử đặt bãi</h2>
+            <h3 class="my-3">Lịch sử đặt bãi</h3>
             <div class="order-card-list row">
                 {ORDER_LIST.map((order) => {
                     if(!isCompleted(order)) {

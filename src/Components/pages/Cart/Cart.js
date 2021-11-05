@@ -1,5 +1,5 @@
 import { cartData } from "../../../data";
-import { CartItem } from "./CartItem";
+import { CartItemThumb } from "./CartItemThumb";
 import { useState, useEffect } from "react";
 import { getOrderTotalPrice } from "../../../utils/OrderUtils";
 export function Cart() {
@@ -7,9 +7,9 @@ export function Cart() {
     const [checkItem, setCheckItem] = useState(null);
 
     return(
-        <div class="container p-3">
+        <div class="container">
             <div class="row mx-auto">
-                <h2>Giỏ hàng của tôi</h2>
+                <h3>Giỏ hàng của tôi</h3>
             </div>
             <div class="row mx-auto my-3">
                 <div class="col-8">
@@ -34,7 +34,7 @@ export function Cart() {
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <CartItem cartItem={cartItem}></CartItem>
+                                    <CartItemThumb cartItem={cartItem}></CartItemThumb>
                                 </div>
                             </div>
                         ) 
