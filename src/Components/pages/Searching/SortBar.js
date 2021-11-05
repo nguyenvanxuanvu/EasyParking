@@ -1,3 +1,4 @@
+import "./SortBar.css"
 export function SortBar() {
   return (
     <div
@@ -13,7 +14,7 @@ export function SortBar() {
         autocomplete="off"
         checked
       />
-      <label class="btn btn-outline-secondary" for="btnradio1">
+      <label class="btn btn-outline-primary shadow-none" for="btnradio1">
         Giá tăng dần
       </label>
 
@@ -25,7 +26,7 @@ export function SortBar() {
         autocomplete="off"
         checked
       />
-      <label class="btn btn-outline-secondary" for="btnradio2">
+      <label class="btn btn-outline-primary shadow-none" for="btnradio2">
         Giá giảm dần
       </label>
 
@@ -37,7 +38,7 @@ export function SortBar() {
         autocomplete="off"
         checked
       />
-      <label class="btn btn-outline-secondary" for="btnradio3">
+      <label class="btn btn-outline-primary shadow-none" for="btnradio3">
         Hạng sao tăng dần
       </label>
 
@@ -45,11 +46,11 @@ export function SortBar() {
         type="radio"
         class="btn-check"
         name="btnradio"
-        id="btnradio3"
+        id="btnradio4"
         autocomplete="off"
         checked
       />
-      <label class="btn btn-outline-secondary" for="btnradio4">
+      <label class="btn btn-outline-primary shadow-none" for="btnradio4">
         Hạng sao giảm dần
       </label>
     </div>

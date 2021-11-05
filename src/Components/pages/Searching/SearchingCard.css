@@ -3,11 +3,11 @@
 }
 
 
-.card{
+/* .card{
     width: 450px;
-    /* flex: 0 0; */
+    flex: 0 0; 
     
-}
+} */
 .card-title-search{
     color: black;
 }
@@ -17,4 +17,14 @@
     /* flex: 0 0; */
 }
 
+.btn.btn-light{
+    background-color: #ffd53b;
+}
+.btn.btn-light:disabled{
+    opacity: 100;
+}
+.card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
 
