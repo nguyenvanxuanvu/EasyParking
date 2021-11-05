@@ -6,9 +6,9 @@ import  { InforPage }  from './InforPage';
     return (
         
         <div class="h-100">
-        <div class="row px-2">
+        {/* <div class="row px-2">
             <TopBar />
-        </div>
+        </div> */}
         <div class="row h-100">
             
                
