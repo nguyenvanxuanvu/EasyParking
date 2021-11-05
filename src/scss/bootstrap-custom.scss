@@ -5,6 +5,10 @@ $theme-colors: (
   "danger": #E74C3C,
   "info": #89AFB2
 );
+$form-check-input-checked-color: #211931;
+$form-check-input-checked-bg-color: #FFD53B;
+$form-check-input-border: 1px solid rgba(0, 0, 0);
+$form-check-input-focus-box-shadow: #FFD53B;
 
 @import '~bootstrap/scss/bootstrap.scss';
 

@@ -125,18 +125,18 @@ export function OrderInfo() {
                                 <tr>
                                 <th scope="row">{idx}</th>
                                 <td>{vehicle.name}</td>
-                                <td>{calDuration(order)}h</td>
+                                <td>{calDuration(order.startTime, order.endTime)}h</td>
                                 <td>{Intl.NumberFormat().format(vehicle.unitPrice)}đ</td>
-                                <td>{Math.ceil(calDuration(order) / FEE_INTERVAL)}</td>
+                                <td>{Math.ceil(calDuration(order.startTime, order.endTime) / FEE_INTERVAL)}</td>
                                 <td>{vehicle.quantity}</td>
-                                <td>{Intl.NumberFormat().format(vehicle.unitPrice * vehicle.quantity * Math.ceil(calDuration(order) / FEE_INTERVAL))}đ</td>
+                                <td>{Intl.NumberFormat().format(vehicle.unitPrice * vehicle.quantity * Math.ceil(calDuration(order.startTime, order.endTime) / FEE_INTERVAL))}đ</td>
                                 </tr>
                             )
                         })}
                         <tr>
                             <td colspan="6">Tổng tiền</td>
                             <td class="text-danger fw-bold fs-5">
-                                {Intl.NumberFormat().format(getOrderTotalPrice(order))}đ
+                                {Intl.NumberFormat().format(getOrderTotalPrice(order.vehicles, order.startTime, order.endTime))}đ
                             </td>
                         </tr>
 

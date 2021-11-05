@@ -5,14 +5,14 @@ const ORDER_STATUS_PREFIX = {
 }
 export const FEE_INTERVAL = 12;
 
-export function calDuration(order) {
-    let startTime = Date.parse(order.startTime);
-    let endTime = Date.parse(order.endTime);
+export function calDuration(startTimeStr, endTimeStr) {
+    let startTime = Date.parse(startTimeStr);
+    let endTime = Date.parse(endTimeStr);
     return (endTime - startTime) / (60 * 60 * 1000);
 }
-export function getOrderTotalPrice(order) {
-    return(order.vehicles.map((vehicle) => {
-        return vehicle.unitPrice * vehicle.quantity * Math.ceil(calDuration(order) / FEE_INTERVAL);
+export function getOrderTotalPrice(vehicles, startTimeStr, endTimeStr) {
+    return(vehicles.map((vehicle) => {
+        return vehicle.unitPrice * vehicle.quantity * Math.ceil(calDuration(startTimeStr, endTimeStr) / FEE_INTERVAL);
     }).reduce((previousValue, currentValue) => previousValue + currentValue));
 }
 export function getOrderStatus(order) {
@@ -41,4 +41,13 @@ export function compareOrder(a, b) {
     if(aWeight > bWeight) return 1;
     else if(a < b) return -1;
     else return 0;
+}
+
+export function vehiclesToString(vehicles) {
+    let validVehicles = vehicles.filter(vehicle => vehicle.quantity > 0);
+    return validVehicles.map(vehicle => vehicle.name).join(", ");
+}
+export function countVehicles(vehicles) {
+    let quantityList = vehicles.map(vehicle => vehicle.quantity);
+    return quantityList.reduce((pre, cur) => pre + cur);
 }

@@ -125,3 +125,61 @@ export const orderData = [
         ]
     },
 ]
+
+export const cartData = [
+    {
+        id: 1,
+        parking: {
+            name: "Bãi đỗ xe Hoa Phượng",
+            address: "1024 An Dương Vương, quận 1, phường 6, TP. Hồ Chí Minh",
+            image: "https://sfactors.vn/wp-content/uploads/2020/07/dd6.jpg"
+        },
+        startTime: "2021-10-23 17:00:00",
+        endTime: "2021-10-24 12:00:00",
+        vehicles: [
+            {
+                name: "Xe máy",
+                unitPrice: 5000,
+                quantity: 1
+            },
+            {
+                name: "Xe 4-7 chỗ",
+                unitPrice: 15000,
+                quantity: 1
+            },
+            {
+                name: "Xe 16 chỗ",
+                unitPrice: 25000,
+                quantity: 0
+            }
+        ]
+    },
+    
+    {
+        id: 2,
+        parking: {
+            name: "Bãi đỗ xe Hoa Mai",
+            address: "1024 An Dương Vương, quận 1, phường 6, TP. Hồ Chí Minh",
+            image: "https://sfactors.vn/wp-content/uploads/2020/07/dd6.jpg"
+        },
+        startTime: "2021-10-23 17:00:00",
+        endTime: "2021-10-24 12:00:00",
+        vehicles: [
+            {
+                name: "Xe máy",
+                unitPrice: 5000,
+                quantity: 1
+            },
+            {
+                name: "Xe 4-7 chỗ",
+                unitPrice: 15000,
+                quantity: 1
+            },
+            {
+                name: "Xe 16 chỗ",
+                unitPrice: 25000,
+                quantity: 1
+            }
+        ]
+    },
+]
