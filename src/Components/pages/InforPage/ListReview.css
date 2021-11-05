@@ -1,0 +1,15 @@
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .numreview{
+      font-weight: 400;
+  }
+
+.therating{
+    color: black;
+    font-weight: 700;
+}
+

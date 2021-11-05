@@ -1,0 +1,21 @@
+.nameReviewer{
+    font-weight: 700;
+    font-size: 16px;
+}
+.timeReview{
+    font-weight: 400;
+    font-size: 13px;
+}
+.numLike{
+    font-weight: 400;
+    font-size: 12px;
+    color: blue;
+}
+.level{
+    font-weight: 500;
+    font-size: 13px;
+}
+.contentReview{
+    font-weight: 400;
+    font-size: 14px;
+}
