@@ -26,3 +26,7 @@
   --lightred: #e74c3c;
   --dark500: #22313f;
 }
+
+.row.h-100.p-3{
+  padding: 0px !important;
+}
