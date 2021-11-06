@@ -1,8 +1,17 @@
-.btn.btn-primary{
+.btn.option{
     background-color: #CBCFC7;
     border: none;
     color: #211931;
     margin-right: 44px;
+}
+
+.btn.option:hover{
+    background-color: #ffd53b;
+    border: none;
+    color: #211931;
+    margin-right: 44px;
+    cursor: pointer;
+    cursor: hand;
 }
 
 .row label{

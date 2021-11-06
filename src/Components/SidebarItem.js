@@ -28,7 +28,7 @@ export const SidebarDatas = [
     title: "Quản lý bãi đỗ",
     icon: <AiOutlineHome/>,
     link: "/account/parking-management"
-},
+}
 ]
 
 export function SidebarItem(props) {

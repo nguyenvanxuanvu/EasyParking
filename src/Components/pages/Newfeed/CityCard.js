@@ -1,6 +1,7 @@
-import './CityCard.css';
+import { NavLink } from 'react-router-dom';
 const CityCard = (props) => {
     return (
+        <NavLink to="/Searching">
         <div class="card mb-3 text-white border-0 shadow">
             <img class="card-img" src={props.img} alt="" height="399px"/>
             <div class="card-img-overlay">
@@ -8,8 +9,7 @@ const CityCard = (props) => {
                 <p class="card-text">{props.number}</p>
             </div>
         </div> 
+        </NavLink>
     );
 }
 export default CityCard;
-// 
-// 

@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import { SidebarDatas, SidebarItem } from './components/SidebarItem';
+import { SidebarDatas, SidebarItem } from './Components/SidebarItem';
 import { useState } from 'react';
-import { Sidebar } from './components/Sidebar';
+import { Sidebar } from './Components/Sidebar';
 import 'react-router-dom';
 import {
     BrowserRouter as Router,
@@ -11,33 +11,43 @@ import {
     Link,
     Redirect
 } from "react-router-dom";
-import { UserInfo } from './components/pages/UserInfo/UserInfo';
-import { TopBar } from './components/TopBar';
-import { OrderHistory } from './components/pages/OrderHistory/OrderHistory';
-import { OrderInfo } from './components/pages/OrderInfo/OrderInfo';
+import { UserInfo } from './Components/pages/UserInfo/UserInfo';
+import { TopBar } from './Components/TopBar';
+import { OrderHistory } from './Components/pages/OrderHistory/OrderHistory';
+import { OrderInfo } from './Components/pages/OrderInfo/OrderInfo';
 import { orderData } from './data';
-import { Cart } from './components/pages/Cart/Cart';
-import { Account } from './components/pages/Account/Account';
-import { CartItemDetail } from './components/pages/CartItemDetail/CartItemDetail';
+import { Cart } from './Components/pages/Cart/Cart';
+import { Account } from './Components/pages/Account/Account';
+import { CartItemDetail } from './Components/pages/CartItemDetail/CartItemDetail';
+import { NewfeedPage } from './Components/pages/Newfeed/NewfeedPage';
+import AllSearchingPage from './Components/pages/Searching/AllSearchingPage'
+import AllInfoPage from './Components/pages/InforPage/AllInfoPage';
+import ScrollToTop from 'react-router-scroll-top'
 
 
 function App() {
     console.log("App" + window.location.pathname);
     return (
         <Router>
+        <ScrollToTop>
             <div class="h-100">
                 <div class="row px-2 sticky-top">
                     <TopBar />
                 </div>
                 <div class="row h-100 p-0">
                     <Switch>
+                        <Route exact path="/" component={NewfeedPage}/>
+                        <Route exact path="/SignIn"/>
+                        <Route exact path="/SignUp"/>
+                        <Route exact path="/Searching" component={AllSearchingPage}/>
+                        <Route exact path="/Info" component={AllInfoPage}/>
                         <Route exact path="/cart" component={Cart}/>
                         <Route exact path="/cart-item-detail" component={CartItemDetail}/>
                         <Route path="/account" component={Account}/>
                     </Switch>
-
                 </div>
             </div>
+            </ScrollToTop>
         </Router>
     )
 }

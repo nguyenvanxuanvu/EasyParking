@@ -1,0 +1,14 @@
+.sidebar-item:hover {
+    background-color: #4A4A4A;
+    
+}
+.form-check-label {
+    color: rgba(255, 255, 255, 1);
+}
+.form-check form-check-input{
+    color: rgba(255, 255, 255, 1);
+    font-size: 14;
+}
+.card-title{
+    color: rgba(255, 255, 255, 1);;
+}
