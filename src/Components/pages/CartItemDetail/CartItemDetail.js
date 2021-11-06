@@ -1,6 +1,6 @@
 export function CartItemDetail() {
     return(
-        <div class="container">
+        <div class="container px-5 py-3">
             <div class="row">
                 <h3>Chỉnh sửa đơn đặt hàng</h3>
             </div>
@@ -63,6 +63,9 @@ export function CartItemDetail() {
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="row justify-content-center">
+                <button class="btn btn-secondary col-2">Hoàn tất</button>
             </div>
         </div>
     )
