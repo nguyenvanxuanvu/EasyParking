@@ -11,6 +11,7 @@ export function Review(props){
             <img src={props.avasrc} alt="Avatar" class="avatar"></img>
             </div>
             <div class="col-8 ps-1 pt-3">
+                
                 <div class= "nameReviewer">{props.name}</div>
                 <div class= "timeReview">Vào lúc {props.time}</div>
                 <div class="numLike">{props.numLike} lượt thích</div>
@@ -33,6 +34,7 @@ export function Review(props){
                 <div class="btn datngay" >
                     Thích
                     </div>
+                    <div class="pt-3  border-bottom"></div>
                 </div>
 
             </div>
