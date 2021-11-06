@@ -1,3 +1,4 @@
+import './accInt.css'
 const Button = ({ BGColor, TColor, text, type, className, onClick }) => {
   return (
     <button

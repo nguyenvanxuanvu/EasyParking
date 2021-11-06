@@ -1,4 +1,6 @@
 import Button from './Button'
+import './accInt.css'
+
 const SearchBar = () => {
     return (
         <form>

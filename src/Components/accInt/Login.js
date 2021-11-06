@@ -1,6 +1,7 @@
 import Button from "./Button"
 import GoogleLogin from 'react-google-login';
 import { Link } from 'react-router-dom';
+import './accInt.css'
 
 const Login = () => {
     return (

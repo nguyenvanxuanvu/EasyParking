@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Button from './Button'
 import SearchBar from './SearchBar'
-
+import './accInt.css'
 
 const Header = () => {
 
