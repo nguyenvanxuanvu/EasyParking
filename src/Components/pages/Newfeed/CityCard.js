@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import './CityCard.css';
 const CityCard = (props) => {
     return (
         <NavLink to="/Searching">

@@ -1,0 +1,71 @@
+.addParkForm{
+    width: 98%;
+}
+
+#formGroupExampleInput {
+    font-size:medium;
+    border-width: 2px;
+    border-color: #211931;
+}
+
+.form-select{
+    border-width: 2px;
+    border-color: #211931;
+}
+
+#floatingTextarea{
+    resize: none;
+    min-height: 200px;
+    padding: 4px;
+    border-width: 2px;
+    border-color: #211931;
+}
+
+.form-label{
+    color: #211931;
+    font-weight: bold;
+}
+
+#hint{
+    font-style: italic;
+}
+
+.btnAddPark{
+    margin: 7px;
+}
+
+#btnAdd{
+    position:relative;
+    left:40%;
+}
+
+.uploadImg{
+    margin: 5px;
+    max-width: 120px;
+}
+
+#icon:hover{
+    cursor: pointer;
+}
+ 
+select .form-select option{
+    background-color:#fff;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+#colType{
+    width: 500px;
+    text-align: left;
+}
+
+.input-table{
+    font-size:medium;
+    border-width: 2px;
+    border-color: #211931;
+    border-radius: 5px;
+}
+
+th {
+    text-align: left;
+}
