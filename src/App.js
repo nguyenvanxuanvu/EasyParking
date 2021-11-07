@@ -25,6 +25,8 @@ import AllInfoPage from './Components/pages/InforPage/AllInfoPage';
 import ScrollToTop from 'react-router-scroll-top'
 import Login from './Components/pages/accInt/Login';
 import Register from './Components/pages/accInt/Register';
+import forgetPass from './Components/pages/accInt/ForgetPass';
+import ForgetPass from './Components/pages/accInt/ForgetPass';
 
 function App() {
     console.log("App" + window.location.pathname);
@@ -40,6 +42,7 @@ function App() {
                         <Route exact path="/" component={NewfeedPage}/>
                         <Route exact path="/SignIn" component={Login}/>
                         <Route exact path="/SignUp" component={Register}/>
+                        <Route exact path="/forgetPass" component={ForgetPass}/>
                         <Route exact path="/Searching" component={AllSearchingPage}/>
                         <Route exact path="/Info" component={AllInfoPage}/>
                         <Route exact path="/cart" component={Cart}/>

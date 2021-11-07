@@ -49,7 +49,7 @@ const Register = () => {
             </form>
 
             <div className='center addMargin'>
-                <p>Bạn đã có tài khoản EasyParking? <span><Link to='login' className='star'>Đăng nhập</Link> </span> </p>
+                <p>Bạn đã có tài khoản EasyParking? <span><Link to='signIn' className='star'>Đăng nhập</Link> </span> </p>
             </div>
 
         </div>

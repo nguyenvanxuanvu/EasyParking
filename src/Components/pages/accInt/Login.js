@@ -27,7 +27,7 @@ const Login = () => {
                 <p>Quên mật khẩu? <span><Link to='/forgetPass' className='star'>Nhấn tại đây</Link> </span> </p>
             </div>
             <div className='center addMargin'>
-                <p>Bạn chưa có tài khoản EasyParking? <span><Link to='/register' className='star'>Đăng ký</Link> </span> </p>
+                <p>Bạn chưa có tài khoản EasyParking? <span><Link to='/signUp' className='star'>Đăng ký</Link> </span> </p>
             </div>
             <div className='center addMargin'>
                 <GoogleLogin buttonText="Đăng nhập với Google" />
