@@ -35,7 +35,7 @@ function App() {
                 <div class="row px-2 sticky-top">
                     <TopBar />
                 </div>
-                <div class="row h-100 p-3">
+                <div class="row h-100 p-0">
                     <Switch>
                         <Route exact path="/" component={NewfeedPage}/>
                         <Route exact path="/SignIn" component={Login}/>
