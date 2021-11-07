@@ -1,0 +1,239 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400&family=Roboto:wght@900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@200;300&family=Roboto:wght@200&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@348&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@348&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@348&family=Poppins&family=Prompt&display=swap');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn {
+  display: inline-block;
+  background: #000;
+  padding: 6px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: Roboto, sans-serif;
+  font-weight: lighter;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 213, 59, 1);
+  width: 100%;
+  border: 0px solid steelblue;
+  border-radius:0 0 0 30px;
+  height: 60px;
+}
+ .topBar div{
+  height:fit-content;
+  border: 0px #ccc solid;
+ }
+
+ .logo{
+  font-family: 'Prompt', sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  margin: 0 1% 0 2%;
+  color: rgba(33, 25, 49, 1);
+ }
+
+ .search-control {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 213, 59, 1);
+}
+
+.search-control input {
+  width: 100%;
+  height: 35px;
+  padding: 3px ;
+  font-size: 17px;
+  border: 1px solid #211931;
+  border-radius: 10px 0 0 10px;
+}
+
+.searchBut{
+  border-radius: 0 10px 10px 0;
+}
+
+.searchBarLoc{
+  width: 60%;
+  margin: 0 3%;
+}
+
+.searchBarCo{
+  background-color:   rgba(255, 213, 59, 1) ;
+}
+
+.loginBut{
+  margin: 2.5%;
+}
+.regisBut{
+  float: right;
+  margin-right: 2%;
+}
+.addPad{
+  padding: 6px 15px;
+}
+
+
+
+
+
+.loginContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 400px;
+  min-height: 300px;
+  margin: auto;
+  margin-top: 5%;
+  border: 0px solid black;
+  
+}
+
+.center{
+  text-align: center;
+}
+
+
+.headerFont{
+  font-family: 'Poppins', sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.inputBlock{
+   display: flex;
+   flex-direction: column;
+ }
+
+/* .inputBlock label {
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 55px;
+  letter-spacing: 0em;
+  text-align: left;
+  display: inline;
+  
+} */
+
+.labelForm{
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 55px;
+  letter-spacing: 0em;
+  text-align: left;
+  display: inline;
+}
+.star{
+  color: red;
+  margin: 0 10px 0 5px;
+}
+
+.inputBlock input {
+  width: 100%;
+  height: 40px;
+  padding: 3px ;
+  font-size: 17px;
+  border: 1px solid #211931;
+  border-radius: 10px;
+}
+
+.addMargin{
+  margin-top: 20px;
+
+}
+
+.checkbox{
+  display: flex;
+  margin-left: 20px;
+}
+
+
+
+
+
+.profileContainer{
+  max-width: 60%;
+  border: 0px solid black;
+  border-radius: 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  margin-top: 6%;
+}
+
+.profile-pic-div{
+  height: 170px;
+  width: 170px;
+  /* position: absolute; */
+  top: 50%;
+  left: 50%;
+  transform: translate(0%,0%);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgb(230, 209, 209);
+}
+
+#photo{
+  height: 100%;
+  width: 100%;
+}
+
+#file{
+  display: none;
+}
+
+#uploadBtn{
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%,10%);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: wheat;
+  line-height: 40px;
+  font-family: sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+  display: block;
+  padding-top: 5px ;
+  margin-top: auto;
+}
+
+.persCon{
+  width: calc(100%-170px);
+  align-items: center;
+  margin-left: 5%;
+}
+
+.btnMar{
+  margin-left: 50%;
+  margin: 10px 0;
+}
+
+.persHeader{
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.infoCon{
+  max-width: 500px;
+}

@@ -5,6 +5,7 @@ import { ParkingManagementPage } from '../ParkingManagement/ParkingManagementPag
 import AddParkingForm from '../AddParking/AddParkingForm'
 import { Sidebar } from '../../Sidebar';
 import { ManageOrderPage } from '../ManageOrder/ManageOrderPage'
+import PersPage from '../accInt/PersPage'
 import {
     BrowserRouter as Router,
     Switch,
@@ -21,13 +22,14 @@ export function Account() {
             </div>
             <div class="col">
                 <Switch>
-                    <Route path="/account/" exact component={UserInfo} />
-                    <Route path="/account/user-info" exact component={UserInfo} />
+                    <Route path="/account/" exact component={PersPage} />
+                    <Route path="/account/user-info" exact component={PersPage} />
                     <Route path="/account/order-history" exact component={OrderHistory} />
                     <Route path="/account/order-info/:id" exact component={OrderInfo} />
                     <Route path="/account/parking-management" exact component={ParkingManagementPage} />
                     <Route path="/account/parking-management/create" exact component={AddParkingForm} />
                     <Route path="/account/order-management" exact component={ManageOrderPage} />
+                    
                 </Switch>
             </div>
         </div>

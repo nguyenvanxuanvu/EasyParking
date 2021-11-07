@@ -23,7 +23,8 @@ import { NewfeedPage } from './Components/pages/Newfeed/NewfeedPage';
 import AllSearchingPage from './Components/pages/Searching/AllSearchingPage'
 import AllInfoPage from './Components/pages/InforPage/AllInfoPage';
 import ScrollToTop from 'react-router-scroll-top'
-
+import Login from './Components/pages/accInt/Login';
+import Register from './Components/pages/accInt/Register';
 
 function App() {
     console.log("App" + window.location.pathname);
@@ -37,8 +38,8 @@ function App() {
                 <div class="row h-100 p-3">
                     <Switch>
                         <Route exact path="/" component={NewfeedPage}/>
-                        <Route exact path="/SignIn"/>
-                        <Route exact path="/SignUp"/>
+                        <Route exact path="/SignIn" component={Login}/>
+                        <Route exact path="/SignUp" component={Register}/>
                         <Route exact path="/Searching" component={AllSearchingPage}/>
                         <Route exact path="/Info" component={AllInfoPage}/>
                         <Route exact path="/cart" component={Cart}/>
