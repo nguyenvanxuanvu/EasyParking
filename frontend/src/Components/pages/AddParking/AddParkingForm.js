@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
 import Button from '../../Button';
 import {
     Link
 } from 'react-router-dom';
 import './AddParkingForm.css';
-import { addParking } from '../ParkingManagement/ParkingManagementPage';
 
 const listPos = [
     {
@@ -47,14 +47,10 @@ export default class AddParkingForm extends Component {
             cbDistrict: '',
             cbWard: '',
             uplImg: [],
-            txtSL_xemay: '',
-            txtSL_4_7: '',
-            txtSL_9_16: '',
-            txtSL_con: '',
             txtPr_xemay: '',
             txtPr_4_7: '',
             txtPr_9_16: '',
-            txtPr_con: ''
+            txtPr_32: ''
         };
     }
 
@@ -81,10 +77,10 @@ export default class AddParkingForm extends Component {
     renderWard = (district) => {
         if (this.state.cbCity !== '') {
             var selCity = parseInt(this.state.cbCity);
-            if(district!==''){
+            if (district !== '') {
                 var selDist = parseInt(district);
-                return(
-                    listPos[selCity].listDistrict[selDist].listWard.map((ward, index)=>{
+                return (
+                    listPos[selCity].listDistrict[selDist].listWard.map((ward, index) => {
                         return <option value={index}>{ward}</option>
                     })
                 );
@@ -102,65 +98,78 @@ export default class AddParkingForm extends Component {
         var target = event.target;
         var name = target.name;
         var value = target.value;
-        
-        console.log(target.value);
-        this.setState({
-            [name]: value
-        });
 
-        if(target.name==='cbCity'){
+        if (target.name === "uplImg") {
+            this.setState((prev) => ({
+                uplImg: [value] // [...prev.uplImg, value]
+            }));
+        }
+        else {
+            this.setState({
+                [name]: value
+            });
+        }
+        // this.setState({
+        //     [name]: value
+        // });
+
+        if (target.name === 'cbCity') {
             this.ward = this.renderWard('');
             this.district = this.renderDistrict(target.value);
         }
 
-        if(target.name==='cbDistrict'){
+        if (target.name === 'cbDistrict') {
             this.ward = this.renderWard(target.value);
         }
     }
 
     validateForm = () => {
         var data = this.state;
-        // if(data.txtName===''||data.txtAddr===''||data.txtDesc===''||
-        //         data.cbCity===''||data.cbDistrict===''||data.cbWard===''){
-        //     return false;
-        // }
 
-        if(data.txtSL_xemay){
-            var sl = parseInt(data.txtSL_xemay);
-            if(Number.isInteger(sl)){
-                this.setState({txtSL_xemay: sl});
-                if(data.txtPr_xemay && data.txtNightPr_xemay){
-                    var day = parseInt(data.txtPr_xemay);
-                    var night = parseInt(data.txtNightPr_xemay);
-                    if(Number.isInteger(day) && Number.isInteger(night)){
-                        this.setState({txtPr_xemay: day});
-                        this.setState({txtNightPr_xemay: night});
-                    }
-                    else return false;
-                }
-                else return false;
-            }
+        if (data.txtName === '' || data.txtAddr === '' || data.txtDesc === '' ||
+            data.cbCity === '' || data.cbDistrict === '' || data.cbWard === '') {
+            return false;
         }
+
+        if (!data.uplImg) {
+            this.setState({ uplImg: ["https://mpng.subpng.com/20180806/cgb/kisspng-clip-art-scalable-vector-graphics-computer-icons-i-upload-svg-png-icon-free-download-234957-onli-5b67cc369e4242.9010695715335291426482.jpg"] });
+        }
+
+        if (!data.txtPr_xemay && !data.txtPr_4_7 && !data.txtPr_9_16 && !data.txtPr_32)
+            return false;
 
         return true;
     }
 
-
     onHandleSubmit = (event) => {
-        // console.log(this.state);
-        // if(this.validateForm()){
-        //     console.log(this.state);
-        // }
-        // else{
-        //     alert("fail validate");
-        // }
-        addParking(this.state.txtName, 'https://mpng.subpng.com/20180806/cgb/kisspng-clip-art-scalable-vector-graphics-computer-icons-i-upload-svg-png-icon-free-download-234957-onli-5b67cc369e4242.9010695715335291426482.jpg', this.state.txtAddr);
+        console.log(this.state.uplImg);
+        if (this.validateForm()) {
+            console.log('successful');
+
+            var postData = {
+                "name": this.state.txtName,
+                "street": this.state.txtAddr,
+                "ward": listPos[this.state.cbCity].listDistrict[this.state.cbDistrict].listWard[this.state.cbWard],
+                "district": listPos[this.state.cbCity].listDistrict[this.state.cbDistrict].district,
+                "province": listPos[this.state.cbCity].city,
+                "description": this.state.txtDesc,
+                "img": this.state.uplImg,// https://media-cdn.laodong.vn/storage/newsportal/2021/3/20/891104/Xe-Du-Tphcm-5.jpg?w=414&h=276&crop=auto&scale=both
+                "price": [Number(this.state.txtPr_xemay), Number(this.state.txtPr_4_7), Number(this.state.txtPr_9_16), Number(this.state.txtPr_32)],
+                "userName": "mhung"
+            };
+            axios.post('/parking/add-parking', postData)
+                .then(() => window.location.href = 'http://localhost:3000/account/parking-management')
+                .catch((err) => console.log(err));
+        }
+        else {
+            alert('failure');
+        }
     }
 
     render() {
-        let upImgIcon = "https://mpng.subpng.com/20180806/cgb/kisspng-clip-art-scalable-vector-graphics-computer-icons-i-upload-svg-png-icon-free-download-234957-onli-5b67cc369e4242.9010695715335291426482.jpg";
+        
         return (
-            <div class="addParkForm">
+            <div class="col-auto addParkForm">
                 <h2>Thêm bãi đỗ</h2>
                 <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
                     <div class="col-6 mb-3">
@@ -213,7 +222,9 @@ export default class AddParkingForm extends Component {
                 <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
                     <label for="formGroupExampleInput" class="form-label">Ảnh minh họa</label>
                     <br />
-                    <img src={upImgIcon} alt="Upload image" class="uploadImg" id="icon" />
+                    <ul class="list-group">
+                        <li class="list-group-item"><input name="uplImg" onChange={this.onHandleChange} type="text" class="form-control" id="formGroupExampleInput"/></li>
+                    </ul>
                 </div>
                 <br />
                 <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
@@ -224,41 +235,32 @@ export default class AddParkingForm extends Component {
                     <thead>
                         <tr>
                             <th scope="col" id="colType">Loại xe</th>
-                            <th scope="col" >Số lượng</th>
                             <th scope="col">Giá gửi 12h</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Xe máy</td>
-                            <td><input type="text" class="input-table" name="txtSL_xemay" onChange={this.onHandleChange}/></td>
-                            <td><input type="text" class="input-table" name="txtPr_xemay" onChange={this.onHandleChange}/> VNĐ</td>
+                            <td><input type="text" class="input-table" name="txtPr_xemay" onChange={this.onHandleChange} /> VNĐ</td>
                         </tr>
                         <tr>
                             <td>Xe 4-7 chỗ</td>
-                            <td><input type="text" class="input-table" name="txtSL_4_7" onChange={this.onHandleChange}/></td>
-                            <td><input type="text" class="input-table" name="txtPr_4_7" onChange={this.onHandleChange}/> VNĐ</td>
+                            <td><input type="text" class="input-table" name="txtPr_4_7" onChange={this.onHandleChange} /> VNĐ</td>
                         </tr>
                         <tr>
                             <td>Xe 9-16 chỗ</td>
-                            <td><input type="text" class="input-table" name="txtSL_9_16" onChange={this.onHandleChange}/></td>
-                            <td><input type="text" class="input-table" name="txtPr_9_16" onChange={this.onHandleChange}/> VNĐ</td>
+                            <td><input type="text" class="input-table" name="txtPr_9_16" onChange={this.onHandleChange} /> VNĐ</td>
                         </tr>
                         <tr>
-                            <td>Xe container</td>
-                            <td><input type="text" class="input-table" name="txtSL_con" onChange={this.onHandleChange}/></td>
-                            <td><input type="text" class="input-table" name="txtPr_con" onChange={this.onHandleChange}/> VNĐ</td>
+                            <td>Xe 32 chỗ</td>
+                            <td><input type="text" class="input-table" name="txtPr_32" onChange={this.onHandleChange} /> VNĐ</td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
                     <span id="btnAdd">
-                        <Link to="/account/parking-management">
-                            <Button onClick={this.onHandleSubmit} bgcolor="#ffd53b" btnName="Thêm bãi đỗ" class="btnAddPark"/>
-                        </Link>
-                        <Link to="/account/parking-management">
-                            <Button bgcolor="#211931" btnName="Hủy" class="btnAddPark"/>
-                        </Link>
+                        <Button onClick={this.onHandleSubmit} bgcolor="#ffd53b" btnName="Thêm bãi đỗ" class="btnAddPark" />
+                        <Link to={'/account/parking-management'}><Button bgcolor="#211931" btnName="Hủy" class="btnAddPark" /></Link>
                     </span>
                 </div>
 

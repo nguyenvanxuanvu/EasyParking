@@ -10,8 +10,8 @@ app.use(express.json());
 
 var mongoose = require('mongoose');
 
-var mongoDB = 'mongodb+srv://nhancu:nhan1601@cluster0.7hgnc.mongodb.net/Easy_Parking?retryWrites=true&w=majority';
-mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+var mongoDB = 'mongodb+srv://mhung:123@cluster0.7hgnc.mongodb.net/Easy_Parking';
+mongoose.connect(mongoDB);
 
 var db = mongoose.connection;
 
@@ -24,6 +24,8 @@ app.use('/order', orderRouter);
 app.use("/user", userRouter);
 app.use("/parking", parkingRouter);
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Example app listening at http://localhost:${port}`)
+// })
+
+module.exports = app;
