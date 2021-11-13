@@ -1,45 +1,29 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const orderRouter = require('./routes/OrderRoutes');
+const userRouter = require("./routes/UserRoutes");
+const parkingRouter = require("./routes/ParkingRoutes");
+
+const app = express()
+const port = 8000
+
+app.use(express.json());
+
 var mongoose = require('mongoose');
 
+var mongoDB = 'mongodb+srv://nhancu:nhan1601@cluster0.7hgnc.mongodb.net/Easy_Parking?retryWrites=true&w=majority';
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 
-// require our routes
-var demoRouter = require('./routes/demoRoute');
-// connect to database server
-mongoose.connect('mongodb+srv://mhung:123@cluster0.7hgnc.mongodb.net/Easy_Parking');
+var db = mongoose.connection;
 
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// route here
-app.use('/', demoRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function () {
+    console.log("Connected successfully");
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use('/order', orderRouter);
+app.use("/user", userRouter);
+app.use("/parking", parkingRouter);
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = app;
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
