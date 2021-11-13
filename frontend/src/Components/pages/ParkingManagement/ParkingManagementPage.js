@@ -1,67 +1,34 @@
 import { Component } from "react";
+import axios from 'axios';
 import Button from "../../Button";
 import ParkCard from "./ParkCard";
 import './ParkingManagementPage.css'
 import { Link } from 'react-router-dom';
-
-let parks= [
-    {
-        name: 'Bãi đỗ Hoa Phượng',
-        img: 'https://www.joneslanglasalle.com.vn/images/cities/jll-are-parking-lots-the-answer-to-the-housing-shortage-teaser.jpg',
-        uncheckOrder: 10,
-        address: '1021 An Dương Vương 1021 An Dương Vương 1021 An Dương Vương 1021 An Dương Vương 1021 An Dương Vương Vương 1021 An Dương Vương 1021 An Dương Vương '
-    },
-    {
-        name: 'Bãi đỗ Hoa Đào',
-        img: 'https://www.joneslanglasalle.com.vn/images/cities/jll-are-parking-lots-the-answer-to-the-housing-shortage-teaser.jpg',
-        uncheckOrder: 10,
-        address: '1021 An Dương Vương'
-    },
-    {
-        name: 'Bãi đỗ Hoa Hồng',
-        img: 'https://www.joneslanglasalle.com.vn/images/cities/jll-are-parking-lots-the-answer-to-the-housing-shortage-teaser.jpg',
-        uncheckOrder: 10,
-        address: '1021 An Dương Vương'
-    },
-    {
-        name: 'Bãi đỗ Hoa Ly',
-        img: 'https://www.joneslanglasalle.com.vn/images/cities/jll-are-parking-lots-the-answer-to-the-housing-shortage-teaser.jpg',
-        uncheckOrder: 10,
-        address: '1021 An Dương Vương'
-    },
-    {
-        name: 'Bãi đỗ Hoa Ly',
-        img: 'https://www.joneslanglasalle.com.vn/images/cities/jll-are-parking-lots-the-answer-to-the-housing-shortage-teaser.jpg',
-        uncheckOrder: 10,
-        address: '1021 An Dương Vương'
-    },
-    {
-        name: 'Bãi đỗ Hoa Ly',
-        img: 'https://www.joneslanglasalle.com.vn/images/cities/jll-are-parking-lots-the-answer-to-the-housing-shortage-teaser.jpg',
-        uncheckOrder: 10,
-        address: '1021 An Dương Vương'
-    }
-]
-
-export const addParking=(name, img, addr)=>{
-    parks.unshift({name:name, img:img, uncheckOrder:0, address:addr});
-};
 
 export class ParkingManagementPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            
+            parks: []
         };
+        axios.get('/parking/parking-management').then((res) => {
+            if (res.status == 200) {
+                this.setState({ parks: res.data });
+            }
+        }).catch(err => console.log(err));
     }
 
     render() {
-        let elements = parks.map((park, index) => {
-            let res = '';
-            res =<ParkCard title={park.name} img={park.img} uncheckOrder={park.uncheckOrder} address={park.address} />
-            return res;
-        });
+        let elements = () => {
+            console.log('hello');
+            return this.state.parks.map((park, index) => {
+                let res = '';
+                res = <ParkCard title={park?.name} img={park?.img[0]} uncheckOrder={10} address={park?.street} />
+                return res;
+            });
+        }
+        console.log(this.state.parks);
 
         return (
             <div>
@@ -72,12 +39,12 @@ export class ParkingManagementPage extends Component {
                     </div>
                 </Link>
                 <div>
-                    <br/> <br/> <br/> <br/>
+                    <br /> <br /> <br /> <br />
                     <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
-                        {elements}
+                        {elements()}
                     </div>
                 </div>
-                
+
             </div>
         );
     }

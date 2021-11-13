@@ -7,4 +7,8 @@ module.exports = {
     return newParking;
   },
 
+  getAllParking: async () => {
+    return await ParkingModel.find();
+  },
+
 }
