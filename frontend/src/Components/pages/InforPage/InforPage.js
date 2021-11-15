@@ -69,9 +69,10 @@ export function InforPage({ Data }) {
             </div>
             <div class="col">
               <div class="row ">
-                <a class="nav-link" href="">
+                {/* <a class="nav-link" href="">
                   Xem trên bản đồ ->{" "}
-                </a>
+                </a> */}
+                <InfoModal name={parking.name} address={parking.street +', ' +parking.ward  +', ' +parking.district+', ' + parking.province}/>
               </div>
             </div>
           </div>
