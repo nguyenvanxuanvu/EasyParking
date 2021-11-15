@@ -45,9 +45,33 @@ const ParkingSchema = new mongoose.Schema({
     price: {
         type: [Number],
         required: true
+    },
+    userName: {
+        type: String,
+        required: true
+    },
+    feedback: [{
+        userName: {
+            type: String,
+            required: true
+        },
+        
+        content: {
+            type: String
+        },
+        time: {
+            type: Date,
+            required: true
+        },
+        rate: {
+            type: Number,
+            required: true
+        }
     }
+    ]
+
 });
 
-const ParkingModel = mongoose.model("Parkings", ParkingSchema);
+const ParkingModel = mongoose.model("Parking", ParkingSchema);
 
 module.exports = ParkingModel;

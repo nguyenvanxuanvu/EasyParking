@@ -1,27 +1,50 @@
-import { SideBarSearch } from './SideBarSearch';
-//import { TopBar } from "../../TopBar";
+import React, { useState } from "react";
 import { SearchingPage } from './SearchingPage';
+import axios from 'axios'
+class AllSearchingPage extends React.Component {
 
-function AllSearchingPage() {
+    state = {
+     parks : [
+        {
+        _id: String,
+        name: String,
+        street: String,
+        ward : String,
+        district: String,
+        province: String,
+        long: Number,
+        lat: Number,
+        description: String,
+        img: Array,
+        price: Array,
+
+
+        }
+  
+      ]
+    }
+    constructor(props) {
+      super(props);
+      this.state = {
+          parks: []
+      };
+      axios.get('/parking/parking-searching').then((res) => {
+          if (res.status == 200) {
+              this.setState({ parks: res.data });
+          }
+      }).catch(err => console.log(err));
+  }
+  
     
-    return (
-        
-        // <div class="h-100">
-        // <div class="row px-2">
-        //     <TopBar />
-        // </div>
-        <div class="row h-100">
-            <div class="col-auto">
-                <SideBarSearch/>
-            </div>
-            <div class="col">
-               
-                    <SearchingPage/>
-                
-            </div>
-        </div>
-    //</div>
-    )
+    render(){
+      return(
+           <SearchingPage Data = {this.state.parks}></SearchingPage>
+          
+      )
+    }
+       
 }
 
-export default AllSearchingPage;
+  
+
+export default AllSearchingPage

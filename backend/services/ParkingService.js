@@ -6,5 +6,8 @@ module.exports = {
     const newParking= await parkingModel.save();
     return newParking;
   },
+  getAllParking: async () => {
+    return await ParkingModel.find();
+  },
 
 }

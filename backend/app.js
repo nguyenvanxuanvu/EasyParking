@@ -10,7 +10,7 @@ app.use(express.json());
 
 var mongoose = require('mongoose');
 
-var mongoDB = 'mongodb+srv://nhancu:nhan1601@cluster0.7hgnc.mongodb.net/Easy_Parking?retryWrites=true&w=majority';
+var mongoDB = 'mongodb+srv://xuanvu231:xuanvu231@cluster0.7hgnc.mongodb.net/Easy_Parking?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 
 var db = mongoose.connection;
