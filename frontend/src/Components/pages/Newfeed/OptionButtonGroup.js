@@ -3,7 +3,7 @@ import { FindByCity } from './FindByCity';
 import { NearMe } from './Nearme';
 import './OptionButtonGroup.css';
 
-const OptionButtonGroup = () => {
+const OptionButtonGroup = (props) => {
     const [active, setActive] = useState("");
 
     return (
@@ -21,7 +21,7 @@ const OptionButtonGroup = () => {
                 </div>
             </div>
             <div>
-                {active === "FirstCard" && <FindByCity/>}
+                {active === "FirstCard" && <FindByCity data={props.data}/>}
                 {active === "SecondCard" && <NearMe/>}
             </div>
         </div>

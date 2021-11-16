@@ -7,8 +7,11 @@ module.exports = {
     const newParking= await parkingModel.save();
     return newParking;
   },
+  getAllParking: async () => {
+    return await ParkingModel.find();
+  },
 
-  getAllParking: async (username) => {
+  getAllParkingBy: async (username) => {
     let data = await ParkingModel.find({userName:username});
     return data;
   },
