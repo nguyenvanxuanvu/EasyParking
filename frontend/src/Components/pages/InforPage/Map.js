@@ -2,8 +2,13 @@ import React from "react";
 import axios from "axios";
 import "./Map.css";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
+import 'mapbox-gl/dist/mapbox-gl.css' // Updating node module will keep css up to date.
+import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css' // Updating node module will keep css up to date.
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaGJuZ28yMSIsImEiOiJja3ZzYXFhZTkwZHVvMzBwY2d1aWRqOHZ4In0.KHDaXZbD8bjSKlB9rwuHnw";
+
+
 
 export default class Map extends React.PureComponent {
   state = {
@@ -49,10 +54,28 @@ export default class Map extends React.PureComponent {
       .setLngLat([lng, lat])
       .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(this.state.address))
       .addTo(map);
+      // map.addControl(
+      //   new MapboxDirections({
+      //   accessToken: mapboxgl.accessToken
+      //   }),
+      //   'top-left'
+      //   );
+      map.addControl(
+        new mapboxgl.GeolocateControl({
+        positionOptions: {
+        enableHighAccuracy: true
+        },
+        // When active the map will receive updates to the device's location as it changes.
+        trackUserLocation: true,
+        // Draw an arrow next to the location dot to indicate which direction the device is heading.
+        showUserHeading: true
+        })
+        );
   }
   render() {
     return (
       <div>
+        <a href = {"https://maps.google.com/?saddr=Current+Location&daddr="+encodeURIComponent(this.state.address)}>Mở trên Google Maps</a> 
         <div ref={this.mapContainer} className="map-container" />
       </div>
     );
