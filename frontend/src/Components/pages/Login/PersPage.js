@@ -3,11 +3,11 @@ import Button from './Button'
 import './accInt.css'
 import { useHistory } from 'react-router'
 
-const PersPage = () => {
+const PersPage = ({setAuth}) => {
     var history = useHistory();
     function logout() {
         localStorage.removeItem("userName");
-        history.push("/login");
+        setAuth(false);
     }
 
     return (

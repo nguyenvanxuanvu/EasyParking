@@ -59,7 +59,7 @@ function App() {
                         <Route exact path="/Info" component={AllInforPage}/> 
                         <Route exact path="/cart" component={Cart}/>
                         <Route exact path="/checkout/:parkingId" render={props => auth ? <CartItemDetail/> : <Login auth={auth} setAuth={setAuth}/>}/>
-                        <Route path="/account" render={props => auth ? <Account/> : <Login auth={auth} setAuth={setAuth}/>}/>
+                        <Route path="/account" render={props => auth ? <Account setAuth={setAuth}/> : <Login auth={auth} setAuth={setAuth}/>}/>
                     </Switch>
                 </div>
             </div>

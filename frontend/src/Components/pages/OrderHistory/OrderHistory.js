@@ -60,7 +60,7 @@ export function OrderHistory() {
                     {orderList.sort(compareOrder).map(order => {
                         return(
                             <tr>
-                                <th scope="row"><Link to={"/account/order-info/" + order.id} target="_blank">#{order._id}</Link></th>
+                                <th scope="row"><Link to={"/account/order-info/" + order._id} target="_blank">#{order._id}</Link></th>
                                 <td>{order.times[0]}</td>
                                 <td>{order.parking.name}</td>
                                 <td>{Intl.NumberFormat().format(getOrderTotalPrice(order.vehicles, order.startTime, order.endTime))}</td>

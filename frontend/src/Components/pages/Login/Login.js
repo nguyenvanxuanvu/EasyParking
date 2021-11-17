@@ -10,7 +10,8 @@ export default function Login({auth, setAuth}) {
     var userName= "";
     var pwd = "";
 
-    function submitLogin() {
+    function submitLogin(e) {
+        e.preventDefault();
         console.log(userName);
         console.log(pwd);
         axios.post("http://localhost:8000/user/authenticate", 
@@ -30,7 +31,7 @@ export default function Login({auth, setAuth}) {
     
     return (
         <div className='loginContainer'>
-            <form>
+            <form method="post">
                 <div className='center'>
                     <p className='headerFont'>Đăng nhập</p>
                 </div>

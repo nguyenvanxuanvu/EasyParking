@@ -138,7 +138,7 @@ export function OrderInfo() {
                                 <tr>
                                 <th scope="row">{idx}</th>
                                 <td>{vehicle.name}</td>
-                                <td>{calDuration(order.startTime, order.endTime)}h</td>
+                                <td>{calDuration(order.startTime, order.endTime).toFixed(1)}h</td>
                                 <td>{Intl.NumberFormat().format(vehicle.unitPrice)}đ</td>
                                 <td>{Math.ceil(calDuration(order.startTime, order.endTime) / FEE_INTERVAL)}</td>
                                 <td>{vehicle.quantity}</td>
