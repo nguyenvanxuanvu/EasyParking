@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import {calDuration, FEE_INTERVAL} from "../../../utils/OrderUtils";
+import { useHistory, useParams } from 'react-router';
 
 export function CartItemDetail() {
+
+    var history = useHistory();
     const VEHICLE_LABEL = ["Xe máy", "Xe ô tô 4-7 chỗ", "Xe 16 chỗ", "Xe 32 chỗ"];
     const [price, setPrice] = useState([0, 0, 0, 0]);
     const [quantity, setQuantity] = useState([0, 0, 0, 0]);
@@ -13,9 +16,12 @@ export function CartItemDetail() {
     const [phone, setPhone] = useState("");
     const [parking, setParking] = useState({});
 
-    const parkingId = "6192205d88c2645e0ad73063";
+    const USER_NAME = localStorage.getItem("userName");
+
+    const {parkingId: PARKING_ID} = useParams();
+
     useEffect(() => {
-        axios.get("http://localhost:8000/parking/" + parkingId)
+        axios.get("http://localhost:8000/parking/" + PARKING_ID)
         .then(res => {
             console.log("okk");
             setParking(res.data);
@@ -35,6 +41,13 @@ export function CartItemDetail() {
     });
 
     function submitOrder() {
+        const TOTAL = price.map((item, idx) => item * quantity[idx])
+        .reduce((pre, cur) => pre + cur) * Math.ceil(calDuration(startTime, endTime) / FEE_INTERVAL);
+        if(TOTAL <= 0 || customerName == "" || phone == "") {
+            alert("Incorrect or missing information, cannot checkout");
+            return;
+        }
+
         axios.post("http://localhost:8000/order/add-order", {
             customer: {
                 name: customerName,
@@ -45,8 +58,8 @@ export function CartItemDetail() {
             endTime: endTime,
             price: price,
             quantity: quantity,
-            parkingId: parkingId,
-            userName: "nhancu"
+            parkingId: PARKING_ID,
+            userName: USER_NAME
         })
         .then(res => {
             alert("Order Successfully");
@@ -55,18 +68,21 @@ export function CartItemDetail() {
             alert(err);
         })
     }
+
+
+
     return(
         <div class="container px-5 py-3">
             <div class="row">
-                <h3>Chỉnh sửa đơn đặt hàng</h3>
+                <h3>Đặt bãi đỗ xe</h3>
             </div>
             <div class="row mt-4">
-                <div class="col-1">
+                <div class="col-2">
                     <img class="img-fluid" src={parking.img ? parking.img[0] : ""}/>
                 </div>
-                <div class="col-12 row">
-                    <span class="col-6 fs-4">{parking.name}</span>
-                    <span class="col-6 fs-6">Địa chỉ: {[parking.street, parking.ward, parking.district, parking.province].join(", ")}</span>
+                <div class="col-10 row">
+                    <span class="col-6 fs-4 ">Tên bãi: {parking.name}</span>
+                    <span class="col-6 fs-5">Địa chỉ: {[parking.street, parking.ward, parking.district, parking.province].join(", ")}</span>
                     <div class="col-6">
                         <label class="form-label fw-bold">Gửi vào lúc</label>
                         <input type="datetime-local" class="form-control" value={startTime} onChange={(event) => setStartTime(event.target.value)}/>
@@ -116,13 +132,21 @@ export function CartItemDetail() {
                                 <td>{Intl.NumberFormat().format(price[idx])}đ</td>
                                 <td><input type="number" class="form-control" value={quantity[idx]} disabled={!price[idx]} onChange={(event) => {
                                         var newQuantity = [...quantity];
-                                        newQuantity[idx] = event.target.value;
+                                        newQuantity[idx] = event.target.value < 0 ? 0 : event.target.value;
                                         setQuantity(newQuantity);
                                     }}/></td>
                                 <td>{Intl.NumberFormat().format(price[idx] * quantity[idx] * Math.ceil(calDuration(startTime, endTime) / FEE_INTERVAL))}đ</td>
                                 </tr>
                             )
                         })}
+                        <tr>
+                            <td><h2>Tổng tiền</h2></td>
+                            <td><h2 class="text-danger">{
+                                Intl.NumberFormat().format(
+                                price.map((item, idx) => item * quantity[idx])
+                                .reduce((pre, cur) => pre + cur) * Math.ceil(calDuration(startTime, endTime) / FEE_INTERVAL))
+                            }đ</h2></td>
+                        </tr>
                         
                     </tbody>
                 </table>

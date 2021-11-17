@@ -11,7 +11,7 @@ app.use(cors());
 
 var mongoose = require('mongoose');
 
-var mongoDB = 'mongodb+srv://nhancu:nhan1601@cluster0.7hgnc.mongodb.net/Easy_Parking?retryWrites=true&w=majority';
+var mongoDB = 'mongodb+srv://mhung:123@cluster0.7hgnc.mongodb.net/Easy_Parking';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 
 var db = mongoose.connection;
@@ -28,3 +28,5 @@ app.use("/parking", parkingRouter);
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+
+module.exports = app;

@@ -3,29 +3,8 @@ import UserGuide from "./UserGuide";
 import OptionButtonGroup from "./OptionButtonGroup";
 import SearchingCard from "../Searching/SearchingCard";
 import { NavLink } from "react-router-dom";
-
-const CITY_INFO_ARR = [
-  [
-    "https://media.vneconomy.vn/images/upload/2021/09/15/tphcm.jpg",
-    "TP Hồ Chí Minh",
-    "200 bãi đỗ xe",
-  ],
-  [
-    "https://photo-cms-vovworld.zadn.vn/w500/Uploaded/vovworld/yzfsm/2019_09_23/vungtau_MWEG.jpg",
-    "Vũng Tàu",
-    "200 bãi đỗ xe",
-  ],
-  [
-    "https://www.vietnambooking.com/wp-content/uploads/2020/12/kinh-nghiem-di-da-lat-thang-12-1.jpg",
-    "Đà Lạt",
-    "200 bãi đỗ xe",
-  ],
-  [
-    "https://bigvn.blog/dp/wp-content/uploads/2018/07/ha-noi-co-bao-nhieu-quan8-1.jpg",
-    "Hà Nội",
-    "200 bãi đỗ xe",
-  ],
-];
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const USER_GUIDE = [
   [
@@ -46,42 +25,79 @@ const USER_GUIDE = [
   ],
 ];
 
-const PARKING_INFO_ARR = [
-  [
-    "Bãi đỗ hoa đào",
-    "https://cand.com.vn/Files/Image/anhkhoa/2019/07/06/thumb_660_b5b6e2e3-3166-45f0-a282-b642759089f3.jpg",
-    7.6,
-    11,
-    "1021 An Dương Vương (bãi sau Vũng Tàu)",
-    "Xe máy , Ô tô 4-7 chỗ và Ô tô 16 chỗ",
-  ],
-  [
-    "Bãi đỗ hoa phượng",
-    "https://cand.com.vn/Files/Image/anhkhoa/2019/07/06/thumb_660_b5b6e2e3-3166-45f0-a282-b642759089f3.jpg",
-    9.6,
-    110,
-    "1021 An Dương Vương (bãi sau Vũng Tàu)",
-    "Xe máy , Ô tô 4-7 chỗ và Ô tô 16 chỗ",
-  ],
-  [
-    "Bãi đỗ hoa mai",
-    "https://cand.com.vn/Files/Image/anhkhoa/2019/07/06/thumb_660_b5b6e2e3-3166-45f0-a282-b642759089f3.jpg",
-    7.6,
-    11,
-    "1021 An Dương Vương (bãi sau Vũng Tàu)",
-    "Xe máy , Ô tô 4-7 chỗ và Ô tô 16 chỗ",
-  ],
-  [
-    "Bãi đỗ hoa mai",
-    "https://cand.com.vn/Files/Image/anhkhoa/2019/07/06/thumb_660_b5b6e2e3-3166-45f0-a282-b642759089f3.jpg",
-    7.6,
-    11,
-    "1021 An Dương Vương (bãi sau Vũng Tàu)",
-    "Xe máy , Ô tô 4-7 chỗ và Ô tô 16 chỗ",
-  ],
-];
-
+const average = arr => arr.reduce((a,b) => a + b, 0) / arr.length;
 export function NewfeedPage() {
+  const [theData, setProvince] = useState([]);
+  
+  
+
+  function GetType(value){
+    var a='';
+    if(value.price[0]>0) a = a+" Xe máy, "
+    if (value.price[1]>0) a= a+ "Xe 4-7 chỗ, "
+    if (value.price[2]>0) a= a+ "Xe 9-16 chỗ, "
+    if (value.price[3]>0 ) a=a+"Xe 32 chỗ, "
+      a =a.slice(0, (-2));
+
+
+    return a;
+  }
+  function getImg(value) {
+    if (value === "TP.Hồ Chí Minh")
+      return "https://media.vneconomy.vn/images/upload/2021/09/15/tphcm.jpg";
+    else if (value === "Bà Rịa - Vũng Tàu")
+      return "https://photo-cms-vovworld.zadn.vn/w500/Uploaded/vovworld/yzfsm/2019_09_23/vungtau_MWEG.jpg";
+    else if (value === "Lâm Đồng")
+      return "https://www.vietnambooking.com/wp-content/uploads/2020/12/kinh-nghiem-di-da-lat-thang-12-1.jpg";
+    else if (value === "Đà lạt")
+      return "https://bigvn.blog/dp/wp-content/uploads/2018/07/ha-noi-co-bao-nhieu-quan8-1.jpg";
+      else if (value == "Khánh Hòa")
+      return "https://luhanhvietnam.com.vn/du-lich/vnt_upload/news/04_2019/khanh-hoa.jpg"
+    
+    
+      else return "https://vn.blog.kkday.com/wp-content/uploads/blogcover-1.jpg"
+  }
+  function getNumCity(value) {
+    let count = 0;
+    for (let i in theData) {
+      if (theData[i].province == value) {
+        count = count + 1;
+      }
+    }
+    return count;
+  }
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/parking/parking-searching")
+      .then((res) => {
+        if (res.status == 200) {
+          setProvince(res.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  function uniq(a) {
+    return a.sort().filter(function (item, pos, ary) {
+      return !pos || item !== ary[pos - 1];
+    });
+  }
+
+  var DataProvince = [];
+  var DataParkingOustanding = [];
+  for (let i in theData) {
+    DataProvince.push(theData[i].province);
+  }
+  DataProvince = uniq(DataProvince);
+  DataProvince = DataProvince.sort((a,b)=>getNumCity(b)-getNumCity(a))
+  DataParkingOustanding = theData.sort((a,b) => average(b.feedback.map((each)=>{
+    return each.rate;
+  })) - average(a.feedback.map((each)=>{
+    return each.rate;
+  })) )
+  var DataProvincefour = DataProvince.slice(0,4);
+  var DataParkingOustandingfour = DataParkingOustanding.slice(0,4);
   return (
     <div>
       <div class="pt-5 ps-5">
@@ -93,20 +109,29 @@ export function NewfeedPage() {
             Đặt chỗ gửi xe nhanh chóng, tiện lợi, thanh toán dễ dàng
           </h3>
           <h3 class="PlaceName text-center">
-            <NavLink to="/SignIn" class="text-primary">Đăng nhập</NavLink> hoặc <NavLink to="/SignUp" class="text-primary">Đăng ký</NavLink> để trải nghiệm
+            <NavLink to="/SignIn" class="text-primary">
+              Đăng nhập
+            </NavLink>{" "}
+            hoặc{" "}
+            <NavLink to="/SignUp" class="text-primary">
+              Đăng ký
+            </NavLink>{" "}
+            để trải nghiệm
           </h3>
           <h4 class="PlaceName pt-4">Địa điểm nổi bật</h4>
           <div class="pt-0">
             <div class="row pe-5">
-              {CITY_INFO_ARR.map((city) => {
+              {DataProvincefour.map((city) => {
                 return (
                   <div class="col-sm-3">
                     <div class="pt-3">
+                    
                       <CityCard
-                        img={city[0]}
-                        name={city[1]}
-                        number={city[2]}
+                        img={getImg(city)}
+                        name={city}
+                        number={getNumCity(city)}
                       ></CityCard>
+                    
                     </div>
                   </div>
                 );
@@ -128,22 +153,23 @@ export function NewfeedPage() {
             </div>
             <h4 class="PlaceName pt-4">Tìm kiếm theo địa điểm</h4>
             <div class="pt-4">
-              <OptionButtonGroup></OptionButtonGroup>
+              <OptionButtonGroup data={DataProvince}></OptionButtonGroup>
             </div>
             <h4 class="PlaceName pt-4">Nổi bật</h4>
             <div class="pt-0">
               <div class="row pe-5">
-                {PARKING_INFO_ARR.map((parking) => {
+                {DataParkingOustandingfour.map((parking) => {
                   return (
                     <div class="col-sm-3">
                       <div class="pt-3 pe-3">
                         <SearchingCard
-                          name={parking[0]}
-                          src={parking[1]}
-                          star={parking[2]}
-                          numEvaluate={parking[3]}
-                          address={parking[4]}
-                          type={parking[5]}
+                          id = {parking._id}
+                          name={parking.name}
+                          src={parking.img[0]}
+                          star={average(parking.feedback.map((each)=>{return each.rate}))}
+                          numEvaluate={parking.feedback.length}
+                          address={parking.street}
+                          type={GetType(parking)}
                         ></SearchingCard>
                       </div>
                     </div>

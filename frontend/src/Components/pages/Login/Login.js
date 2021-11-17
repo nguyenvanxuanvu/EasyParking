@@ -5,7 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 
 
-export default function Login() {
+export default function Login({auth, setAuth}) {
     var history = useHistory();
     var userName= "";
     var pwd = "";
@@ -20,16 +20,13 @@ export default function Login() {
         })
         .then(res => {
             localStorage.setItem("userName", userName);
-            history.push("/");
+            setAuth(true);
         })
         .catch(err => {
-            alert("Incorrect");
+            alert(err);
         })
     }
 
-    if(localStorage.getItem("userName")) {
-        history.push("/");
-    }
     
     return (
         <div className='loginContainer'>
@@ -37,18 +34,18 @@ export default function Login() {
                 <div className='center'>
                     <p className='headerFont'>Đăng nhập</p>
                 </div>
-                <div className='inputBlock'>                    
+                <div className='mb-3'>                    
                         <label className='labelForm' ><span className='star'>*</span>Tên đăng nhập</label>               
-                        <input  type='text' onChange={(event) => userName = event.target.value} />             
+                        <input  type='text' class="form-control"  onChange={(event) => userName = event.target.value} />             
                 </div>
-                <div className='inputBlock'>
+                <div className='mb-3'>
                         <label className='labelForm'><span className='star'>*</span>Mật khẩu</label>
-                        <input   type='password'   onChange={(event) => pwd = event.target.value}/>
+                        <input type='password' class="form-control" onChange={(event) => pwd = event.target.value}/>
+                </div>
+                <div className='center addMargin' onClick={submitLogin}>
+                    <button type="submit" class="btn btn-primary" onClick={submitLogin}>Đăng nhập</button>
                 </div>
             </form>
-            <div className='center addMargin' onClick={submitLogin}>
-                <Button text='Đăng nhập' />
-            </div>
             <div className='center addMargin'>
                 <p>Quên mật khẩu? <span><Link to='/forgetPass' className='star'>Nhấn tại đây</Link> </span> </p>
             </div>

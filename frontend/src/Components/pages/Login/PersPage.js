@@ -1,8 +1,14 @@
 import React from 'react'
 import Button from './Button'
 import './accInt.css'
+import { useHistory } from 'react-router'
 
 const PersPage = () => {
+    var history = useHistory();
+    function logout() {
+        localStorage.removeItem("userName");
+        history.push("/login");
+    }
 
     return (
         <div className="BigContainer">
@@ -48,7 +54,7 @@ const PersPage = () => {
                         </div>
                     </div>
 
-                    <Button className="btn btnMar" text="Chỉnh sửa thông tin" />
+                    <Button className="btn btnMar" onClick={logout} text="Đăng xuất" />
                 </div>
             </div>
 

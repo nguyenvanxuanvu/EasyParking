@@ -3,9 +3,9 @@ import '../InforPage/InforPage'
 import { NavLink } from 'react-router-dom';
 const SearchingCard = (props) => {
   return (
-    <NavLink to="/Info" class="text-decoration-none text-secondary ">
-      <div class = "row-auto ps-1 pe-1">
-      <div class="card widthcard border-0 shadow">
+    <NavLink to={"/Info/" + props.id} class="text-decoration-none text-secondary ">
+      <div class = "row-auto ps-3 pe-3">
+      <div class="card  widthcard border-0 shadow">
         <div class="card-body">
           <h5 class="card-title-search">{props.name}</h5>
           <div class="pt-2">
@@ -17,7 +17,9 @@ const SearchingCard = (props) => {
             <div class="row">
               <div class="col-auto">
                 <button type="button" class="btn btn-light btn " disabled>
-                  {props.star}
+                  {  props.star > 0 && (props.star.toFixed(1))}
+                  {  !props.star && (<div>*</div>)}
+
                 </button>
               </div>
               <div class="col">
@@ -43,8 +45,9 @@ const SearchingCard = (props) => {
           <div class="pt">
             
             <div class="row">
-            <div class="text-center">
-            <NavLink to="/reser" class="btn btn-light align-items-center">
+            <div class="button-fix">
+            
+            <NavLink to={"/checkout/" + props.id} class="btn btn-light align-items-center">
               Đặt ngay
             </NavLink>
             </div>

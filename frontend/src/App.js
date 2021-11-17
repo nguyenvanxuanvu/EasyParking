@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { SidebarDatas, SidebarItem } from './Components/SidebarItem';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sidebar } from './Components/Sidebar';
 import 'react-router-dom';
 import {
@@ -12,7 +12,7 @@ import {
     Redirect
 } from "react-router-dom";
 import { UserInfo } from './Components/pages/UserInfo/UserInfo';
-import { TopBar } from './Components/TopBar';
+import  TopBar  from './Components/TopBar';
 import { OrderHistory } from './Components/pages/OrderHistory/OrderHistory';
 import { OrderInfo } from './Components/pages/OrderInfo/OrderInfo';
 import { orderData } from './data';
@@ -21,34 +21,45 @@ import { Account } from './Components/pages/Account/Account';
 import { CartItemDetail } from './Components/pages/CartItemDetail/CartItemDetail';
 import { NewfeedPage } from './Components/pages/Newfeed/NewfeedPage';
 import AllSearchingPage from './Components/pages/Searching/AllSearchingPage'
-import AllInfoPage from './Components/pages/InforPage/AllInfoPage';
+import  AllInforPage  from './Components/pages/InforPage/AllInforPage';
 import ScrollToTop from 'react-router-scroll-top'
 import Login from './Components/pages/Login/Login';
 import Register from './Components/pages/Login/Register';
 import forgetPass from './Components/pages/Login/ForgetPass';
 import ForgetPass from './Components/pages/Login/ForgetPass';
+import Loading from './Components/pages/Loading/Loading';
 
 function App() {
+    const [auth, setAuth] = useState(false);
+    useEffect(() => {
+        const USER_NAME = localStorage.getItem("userName");
+        if(USER_NAME) {
+            setAuth(true);
+        }
+    }, [])
+
     console.log("App" + window.location.pathname);
     return (
         <Router>
         <ScrollToTop>
             <div class="h-100">
                 <div class="row px-2 sticky-top">
-                    <TopBar />
+                    <TopBar auth={auth} setAuth={setAuth} />
                 </div>
                 <div class="row h-100 p-0">
                     <Switch>
-                        <Route exact path="/" component={NewfeedPage}/>
-                        <Route exact path="/login" component={Login}/>
-                        <Route exact path="/SignIn" component={Login}/>
+                        <Route exact path="/loading" component={Loading}/>
+                        <Route exact path="/" render={props => <NewfeedPage/>}/>
+                        <Route exact path="/login" render={props => auth ? <NewfeedPage/> : <Login auth={auth} setAuth={setAuth}/>}/>
+ 
                         <Route exact path="/SignUp" component={Register}/>
                         <Route exact path="/forgetPass" component={ForgetPass}/>
-                        <Route exact path="/Searching" component={AllSearchingPage}/>
-                        <Route exact path="/Info" component={AllInfoPage}/>
+                        <Route exact path="/Searching/:id" component={AllSearchingPage}/>
+                        <Route exact path='/Info/:id' children={<AllInforPage />} />
+                        <Route exact path="/Info" component={AllInforPage}/> 
                         <Route exact path="/cart" component={Cart}/>
-                        <Route exact path="/cart-item-detail" component={CartItemDetail}/>
-                        <Route path="/account" component={Account}/>
+                        <Route exact path="/checkout/:parkingId" render={props => auth ? <CartItemDetail/> : <Login auth={auth} setAuth={setAuth}/>}/>
+                        <Route path="/account" render={props => auth ? <Account/> : <Login auth={auth} setAuth={setAuth}/>}/>
                     </Switch>
                 </div>
             </div>

@@ -9,6 +9,9 @@ import { useParams } from 'react-router';
 import {orderData} from '../../../data';
 import {calDuration, FEE_INTERVAL, getOrderTotalPrice } from '../../../utils/OrderUtils';
 import { padLeadingZeros } from '../../../utils/CommonUtils';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import Loading from '../Loading/Loading';
 
 const ORDER_STATUS_LABEL = ["gửi", "xác nhận", "đỗ xe", "lấy xe", "hoàn tất"]
 const ORDER_STATUS_PREFIX = {
@@ -22,13 +25,23 @@ function getOrderInfo(orderId) {
 
 export function OrderInfo() {
     const {id: ORDER_ID} = useParams();
-    const order = getOrderInfo(ORDER_ID);
+    const [order, setOrder] = useState(null);
+
+    useEffect(() => {
+        axios.get("/order/" + ORDER_ID)
+        .then((res) => {
+            console.log(res.data);
+            setOrder(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, []);
+    
 
     if(!order) {
         return(
-            <div class="container">
-                <h2>Lỗi: Mã đơn hàng không hợp lệ</h2>
-            </div>
+            <Loading/>
         )
     }
     
@@ -37,12 +50,12 @@ export function OrderInfo() {
     let steps = order.times.map((time, idx) => {
         let prefix = "";
         let label= ORDER_STATUS_LABEL[idx];
-        if(time == "") {
+        if(!time) {
             prefix = ORDER_STATUS_PREFIX.inactive;
         }
         else {
             prefix = ORDER_STATUS_PREFIX.active;
-            label = label.concat(" ", "vào lúc", " ", time);
+            label = label.concat(" ", "vào lúc", " ", new Date(time));
             activeStep = idx + 1;
             if(activeStep == ORDER_STATUS_LABEL.length) {
                 activeStep--;
@@ -55,9 +68,9 @@ export function OrderInfo() {
 
     return(
         <div class="container">
-            <h3 class="my-3">Thông tin đơn hàng #{padLeadingZeros(order.id, 9)}</h3>
+            <h3 class="my-3">Thông tin đơn hàng #{order._id}</h3>
             <div class="row mx-auto">
-                <div class="col">
+                <div class="col-7">
                     <div class="row mx-auto">
                         <div class="col-12 bg-secondary text-white p-2">
                             <span>Thông tin khách hàng</span>
@@ -65,23 +78,23 @@ export function OrderInfo() {
                     </div>
                     <div class="row mx-auto border py-2">
                         <div class="col-6">
-                            <label class="form-label">Tên khách hàng</label>
+                            <label>Tên khách hàng</label>
                             <input class="form-control" type="text" value={order.customer.name} aria-label="readonly input example" readonly/>
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Số điện thoại</label>
+                            <label>Số điện thoại</label>
                             <input class="form-control" type="text" value={order.customer.phone} aria-label="readonly input example" readonly/>
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Email</label>
+                            <label>Email</label>
                             <input class="form-control" type="text" value={order.customer.email} aria-label="readonly input example" readonly/>
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Phương thức thanh toán</label>
+                            <label>Phương thức thanh toán</label>
                             <input class="form-control" type="text" value={order.paymentMethod} aria-label="readonly input example" readonly/>
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Gửi vào lúc</label>
+                            <label>Gửi vào lúc</label>
                             <input class="form-control" type="text" value={order.startTime} aria-label="readonly input example" readonly/>
                         </div>
                         <div class="col-6">
