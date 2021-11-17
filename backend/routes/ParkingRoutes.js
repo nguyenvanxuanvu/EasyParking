@@ -13,4 +13,15 @@ router.post("/add-parking", async function (req, res) {
     }
 });
 
+router.get("/:parkingId", async function (req, res) {
+    console.log("GET parking");
+    try {
+        const parking = await ParkingService.getParking(req.params.parkingId);
+        res.status(200).send(parking);
+    }
+    catch(error) {
+        res.status(500).send(error);
+    }
+})
+
 module.exports = router;

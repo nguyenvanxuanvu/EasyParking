@@ -23,10 +23,10 @@ import { NewfeedPage } from './Components/pages/Newfeed/NewfeedPage';
 import AllSearchingPage from './Components/pages/Searching/AllSearchingPage'
 import AllInfoPage from './Components/pages/InforPage/AllInfoPage';
 import ScrollToTop from 'react-router-scroll-top'
-import Login from './Components/pages/accInt/Login';
-import Register from './Components/pages/accInt/Register';
-import forgetPass from './Components/pages/accInt/ForgetPass';
-import ForgetPass from './Components/pages/accInt/ForgetPass';
+import Login from './Components/pages/Login/Login';
+import Register from './Components/pages/Login/Register';
+import forgetPass from './Components/pages/Login/ForgetPass';
+import ForgetPass from './Components/pages/Login/ForgetPass';
 
 function App() {
     console.log("App" + window.location.pathname);
@@ -40,6 +40,7 @@ function App() {
                 <div class="row h-100 p-0">
                     <Switch>
                         <Route exact path="/" component={NewfeedPage}/>
+                        <Route exact path="/login" component={Login}/>
                         <Route exact path="/SignIn" component={Login}/>
                         <Route exact path="/SignUp" component={Register}/>
                         <Route exact path="/forgetPass" component={ForgetPass}/>

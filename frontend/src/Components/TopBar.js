@@ -1,6 +1,9 @@
 import {AiOutlineShoppingCart} from 'react-icons/ai'
 
 export function TopBar() {
+    function logout() {
+        localStorage.removeItem("userName");
+    }
     return(
         <div class="row top-bar bg-primary p-2">
             <h3 class="col-auto">EasyParking</h3>
@@ -18,9 +21,17 @@ export function TopBar() {
                 </a>
             </div>
             <div class="col-auto d-flex align-items-center px-4">
-                <a href="/account">
-                    <span class="text-secondary fw-bold">Tài khoản</span>
-                </a>
+  
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tài khoản
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="/account">Thông tin tài khoản</a></li>
+                        <li><a class="dropdown-item" href="/login" onClick={logout}>Đăng xuất</a></li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     )

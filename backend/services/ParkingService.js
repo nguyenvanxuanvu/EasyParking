@@ -7,4 +7,10 @@ module.exports = {
     return newParking;
   },
 
+  getParking: async (parkingId) => {
+    console.log(parkingId);
+    const parking = await ParkingModel.findOne({_id: parkingId});
+    console.log(parking);
+    return parking;
+  }
 }

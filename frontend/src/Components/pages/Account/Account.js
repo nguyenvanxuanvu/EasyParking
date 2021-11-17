@@ -5,7 +5,7 @@ import { ParkingManagementPage } from '../ParkingManagement/ParkingManagementPag
 import AddParkingForm from '../AddParking/AddParkingForm'
 import { Sidebar } from '../../Sidebar';
 import { ManageOrderPage } from '../ManageOrder/ManageOrderPage'
-import PersPage from '../accInt/PersPage'
+import PersPage from '../Login/PersPage'
 import {
     BrowserRouter as Router,
     Switch,

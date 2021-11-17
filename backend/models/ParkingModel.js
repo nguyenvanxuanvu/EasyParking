@@ -45,6 +45,11 @@ const ParkingSchema = new mongoose.Schema({
     price: {
         type: [Number],
         required: true
+    },
+    
+    userName: {
+        type: String,
+        required: true
     }
 });
 

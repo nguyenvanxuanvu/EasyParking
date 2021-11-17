@@ -2,11 +2,12 @@ const express = require('express');
 const orderRouter = require('./routes/OrderRoutes');
 const userRouter = require("./routes/UserRoutes");
 const parkingRouter = require("./routes/ParkingRoutes");
-
+const cors = require('cors');
 const app = express()
 const port = 8000
 
 app.use(express.json());
+app.use(cors());
 
 var mongoose = require('mongoose');
 

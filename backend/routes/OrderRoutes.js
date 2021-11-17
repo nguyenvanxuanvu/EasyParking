@@ -2,43 +2,36 @@ const express = require("express");
 const OrderModel = require("../models/OrderModels.js");
 const ParkingModel = require("../models/ParkingModel.js");
 const UserModel = require("../models/UserModel.js");
+const OrderService = require("../services/OrderService.js");
 
 const router = express.Router();
 
-router.post('/addOrder', async function(req, res){
+router.post('/add-order', async function(req, res){
    console.log('POST add new order');
-   const order = new OrderModel(req.body);
-
     try {
-      await order.save();
-      res.send(order);
+      const order = await OrderService.createOrder(req.body);
+      if(order) {
+        res.send(order);
+      }
+      else {
+        res.status(406).send(`Parking Id ${req.body.parkingId} not exist`);
+      }
     } catch (error) {
       res.status(500).send(error);
     }
 });
 
-
-router.get("/parking", async function(req, res){
-  console.log("GET parking");
-  const parkings = await ParkingModel.find({});
+router.get("/:orderId", async function(req, res) {
+  console.log("GET order from orderId");
+  console.log(req.params.orderId);
   try {
-    res.send(parkings);
+    const order = await OrderService.getOrder(req.params.orderId);
+    res.send("okk");
   }
-  catch(err) {
-    res.status(500).send(err)
+  catch(error) {
+    res.status(500).send(error);
   }
-})
 
-router.post("/add-user", async function(req, res) {
-  console.log('POST add new user');
-  const user = new UserModel(req.body);
-
-   try {
-     await user.save();
-     res.send(user);
-   } catch (error) {
-     res.status(500).send(error);
-   }
 })
 
 module.exports = router;
