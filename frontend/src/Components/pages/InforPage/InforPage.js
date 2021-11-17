@@ -4,6 +4,7 @@ import { ListReview } from "./ListReview";
 import { NavLink } from "react-router-dom";
 import ImageSlider from "./ImageSlider";
 import { useParams } from "react-router";
+import InfoModal from './MapPopup';
 
 export function InforPage({ Data }) {
   let { id } = useParams();

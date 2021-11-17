@@ -46,10 +46,12 @@ const ParkingSchema = new mongoose.Schema({
         type: [Number],
         required: true
     },
+
     userName: {
         type: String,
         required: true
     },
+
     feedback: [{
         userName: {
             type: String,
@@ -69,9 +71,8 @@ const ParkingSchema = new mongoose.Schema({
         }
     }
     ]
-
 });
 
-const ParkingModel = mongoose.model("Parking", ParkingSchema);
+const ParkingModel = mongoose.model("parkings", ParkingSchema);
 
 module.exports = ParkingModel;
