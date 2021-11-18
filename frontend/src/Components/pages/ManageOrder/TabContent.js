@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { removeVI, DefaultOption } from "jsrmvi";
 import Button from '../../Button';
 import './TabContent.css';
 
@@ -158,7 +159,7 @@ export function TabContent(props) {
         if (filterValue === '')
             return orders;
         else {
-            filterValue = filterValue?.replace(/\s/g, '').toLowerCase();
+            filterValue = removeVI(filterValue, { replaceSpecialCharacters: false })?.replace(/\s/g, '');
             let res = [];
             orders?.map((order) => {
                 switch (filterOption) {
@@ -166,20 +167,24 @@ export function TabContent(props) {
                         if (('#' + order[1]?._id?.replace(/\s/g, '').toLowerCase()).search(filterValue) >= 0) res.push(order);
                         break;
                     case 'Tên bãi đỗ':
-                        if (order[0]?.replace(/\s/g, '').toLowerCase().search(filterValue) >= 0) res.push(order);
+                        var text = removeVI(order[0], { replaceSpecialCharacters: false });
+                        if (text.replace(/\s/g, '').search(filterValue) >= 0) res.push(order);
                         break;
                     case 'Hạn xác nhận':
-                        if (checkTime(order[1]?.times[0]).replace(/\s/g, '').toLowerCase().search(filterValue) >= 0) res.push(order);
+                        var text = removeVI(checkTime(order[1]?.times[0]), { replaceSpecialCharacters: false });
+                        if (text.replace(/\s/g, '').search(filterValue) >= 0) res.push(order);
                         break;
                     case 'Thông tin':
                         var t;
                         for (const i of displayInfo(order[1]?.quantity, 'text')) {
                             t += i;
                         }
-                        if (t.replace(/\s/g, '').toLowerCase().search(filterValue) >= 0) res.push(order);
+                        var text = removeVI(t, { replaceSpecialCharacters: false });
+                        if (text.replace(/\s/g, '').toLowerCase().search(filterValue) >= 0) res.push(order);
                         break;
                     case 'Tổng tiền':
-                        if (totalPrice(order[1]?.price, order[1]?.quantity).toString().replace(/\s/g, '').toLowerCase().search(filterValue) >= 0) res.push(order);
+                        var text = removeVI(totalPrice(order[1]?.price, order[1]?.quantity).toString(), { replaceSpecialCharacters: false });
+                        if (text.replace(/\s/g, '').search(filterValue) >= 0) res.push(order);
                         break;
                 }
             });

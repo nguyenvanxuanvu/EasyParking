@@ -7,7 +7,7 @@ export function ManageOrderPage() {
     const [toggleState, setToggleState] = useState(0);
     const [orders, setListOrders] = useState();
 
-    const USER_NAME = localStorage.getItem("userName");
+    const USER_NAME = 'nhancu' //localStorage.getItem("userName");
 
     const toggleTab = (index) => {
         setToggleState(index);
