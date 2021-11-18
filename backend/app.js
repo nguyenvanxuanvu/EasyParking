@@ -2,6 +2,7 @@ const express = require('express');
 const orderRouter = require('./routes/OrderRoutes');
 const userRouter = require("./routes/UserRoutes");
 const parkingRouter = require("./routes/ParkingRoutes");
+const paymentRouter = require("./routes/PaymentRoutes");
 const cors = require('cors');
 const app = express()
 const port = 8000
@@ -24,6 +25,8 @@ db.once("open", function () {
 app.use('/order', orderRouter);
 app.use("/user", userRouter);
 app.use("/parking", parkingRouter);
+app.use("/payment", paymentRouter);
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

@@ -28,6 +28,8 @@ import Register from './Components/pages/Login/Register';
 import forgetPass from './Components/pages/Login/ForgetPass';
 import ForgetPass from './Components/pages/Login/ForgetPass';
 import Loading from './Components/pages/Loading/Loading';
+import PaymentSuccess from './Components/pages/Payment/PaymentSuccess';
+import PaymentFail from './Components/pages/Payment/PaymentFail';
 
 function App() {
     const [auth, setAuth] = useState(false);
@@ -60,6 +62,8 @@ function App() {
                         <Route exact path="/cart" component={Cart}/>
                         <Route exact path="/checkout/:parkingId" render={props => auth ? <CartItemDetail/> : <Login auth={auth} setAuth={setAuth}/>}/>
                         <Route path="/account" render={props => auth ? <Account setAuth={setAuth}/> : <Login auth={auth} setAuth={setAuth}/>}/>
+                        <Route path="/payment/success" component={PaymentSuccess}/>
+                        <Route path="/payment/fail" component={PaymentFail}/>
                     </Switch>
                 </div>
             </div>

@@ -15,6 +15,7 @@ export function CartItemDetail() {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [parking, setParking] = useState({});
+    const [onlinePayment, setOnlinePayment] = useState(false);
 
     const USER_NAME = localStorage.getItem("userName");
 
@@ -63,10 +64,23 @@ export function CartItemDetail() {
         })
         .then(res => {
             alert("Order Successfully");
+            history.goBack();
         })
         .catch(err => {
             alert(err);
-        })
+        });
+        if(onlinePayment) {
+            axios.post("http://localhost:8000/payment/process", {
+                amount: (TOTAL / 23000).toFixed(1),
+                description: parking.name
+            })
+            .then(res => {
+                window.open(res.data, "_blank");
+            })
+            .catch(err => {{
+                alert(err);
+            }})
+        }
     }
 
 
@@ -150,6 +164,21 @@ export function CartItemDetail() {
                         
                     </tbody>
                 </table>
+            </div>
+            <div>
+                <h4>Hình thức thanh toán</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" checked={!onlinePayment} onChange={() => setOnlinePayment(false)}/>
+                    <label class="form-check-label text-secondary" >
+                        Thanh toán tại chỗ
+                    </label>
+                    </div>
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" checked={onlinePayment} onChange={() => setOnlinePayment(true)}/>
+                    <label class="form-check-label text-secondary">
+                        Thanh toán online bằng Paypal
+                    </label>
+                </div>
             </div>
             <div class="row justify-content-center">
                 <button class="btn btn-secondary col-2" onClick={submitOrder}>Đặt hàng/Hoàn tất</button>
