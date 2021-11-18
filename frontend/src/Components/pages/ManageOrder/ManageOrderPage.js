@@ -7,12 +7,14 @@ export function ManageOrderPage() {
     const [toggleState, setToggleState] = useState(0);
     const [orders, setListOrders] = useState();
 
+    const USER_NAME = localStorage.getItem("userName");
+
     const toggleTab = (index) => {
         setToggleState(index);
     };
 
     let getOrders = () => {
-        axios.get('/order/order-management/xvu').then((res) => {
+        axios.get('/order/order-management/'+USER_NAME).then((res) => {
             if (res.status === 200) {
                 setListOrders(res.data);
             }

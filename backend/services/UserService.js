@@ -8,7 +8,8 @@ module.exports = {
   },
 
   authenticate: async (userName, password) => {
-    const isValid = await UserModel.find({ $and: [{userName: userName}, {password: password}]});
-    return isValid;
+    const userExist = await UserModel.exists({ $and: [{userName: userName}, {password: password}]});
+    console.log(userExist)
+    return userExist;
   }
 }
