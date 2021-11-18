@@ -18,9 +18,20 @@ router.post("/add-parking", async function (req, res) {
     }
 });
 
+router.post("/addfeedback", async function (req, res) {
+    console.log('POST add new feedback');
+    const parking = await ParkingService.addFeedback(req.body);
+    try {
+        
+        await parking.save();
+        res.status(201).send(parking.feedback);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
 
 router.get("/parking-management/:user", async function (req, res) {
-    console.log('GET all parking');
+    console.log('GET all parking by user');
     try {
         const listParking = await ParkingService.getAllParkingBy(req.params.user);
         let uncheck = []

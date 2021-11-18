@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
+import { removeVI, DefaultOption } from 'jsrmvi';
 const CityCard = (props) => {
     return (
-        <NavLink to={"/Searching/"+props.name} class="text-decoration-none text-secondary ">
+        <NavLink to={"/Searching/"+removeVI(props.name)} class="text-decoration-none text-secondary ">
         <div class="card mb-3 text-white border-0 shadow">
             <img class="card-img" src={props.img} alt="" height="399px"/>
             <div class="card-img-overlay">

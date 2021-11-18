@@ -1,7 +1,10 @@
 import "./Review.css";
 import { StarRating } from "./StarRating";
 import Moment from "moment";
+import  { StarRate } from "./star";
+import { useState } from "react";
 export function Review(props) {
+
   return (
     <div class="row pt-4">
       <div class="col">
@@ -13,14 +16,13 @@ export function Review(props) {
             <div class="nameReviewer">{props.name}</div>
             <div class="timeReview">
               Vào lúc{" "}
-              {Moment(props.time).format("HH:MM") +
-                " ngày " +
-                Moment(props.time).format("DD-MM-YYYY")}
+              {props.time }
+                
             </div>
 
             <div class="row">
               <div class="col-auto">
-                <StarRating count={props.star} />
+                <StarRating  count={props.star} />
               </div>
             </div>
             <div class="row pt-3">

@@ -27,6 +27,7 @@
   border-bottom: 8px solid #a7adb2;
   box-sizing: content-box;
   position: relative;
+  user-select: none;  
 }
 /* .tabs:not(:last-child){
     border-right: 1px solid rgba(0, 0, 0, 0.274);

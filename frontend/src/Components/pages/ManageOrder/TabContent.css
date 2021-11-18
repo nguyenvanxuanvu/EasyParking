@@ -33,4 +33,5 @@
   .total-money{
       font-weight: bold;
       color: red;
+      text-align: right;
   }

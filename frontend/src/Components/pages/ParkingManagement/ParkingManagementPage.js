@@ -13,7 +13,11 @@ export class ParkingManagementPage extends Component {
             parks: [],
             uncheck: []
         };
-        axios.get('/parking/parking-management/mhung').then((res) => {
+        this.USER_NAME = localStorage.getItem("userName");
+    }
+
+    componentWillMount() {
+        axios.get('/parking/parking-management/' + this.USER_NAME).then((res) => {
             if (res.status == 200) {
                 this.setState({ parks: res.data[0], uncheck: res.data[1] });
             }
@@ -24,10 +28,10 @@ export class ParkingManagementPage extends Component {
         let elements = () => {
             return this.state.parks.map((park, index) => {
                 let res = '';
-                res = <ParkCard title={park?.name} 
-                            img={park?.img[0]} 
-                            uncheckOrder={this.state.uncheck[index]} 
-                            address={park?.street+', '+park?.ward+', '+park?.district+', '+park?.province} />
+                res = <ParkCard _id={park?._id} title={park?.name}
+                    img={park?.img[0]}
+                    uncheckOrder={this.state.uncheck[index]}
+                    address={park?.street + ', ' + park?.ward + ', ' + park?.district + ', ' + park?.province} />
                 return res;
             });
         }
