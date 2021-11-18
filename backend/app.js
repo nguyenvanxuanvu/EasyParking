@@ -2,11 +2,12 @@ const express = require('express');
 const orderRouter = require('./routes/OrderRoutes');
 const userRouter = require("./routes/UserRoutes");
 const parkingRouter = require("./routes/ParkingRoutes");
-
+const cors = require('cors');
 const app = express()
 const port = 8000
 
 app.use(express.json());
+app.use(cors());
 
 var mongoose = require('mongoose');
 
@@ -24,8 +25,8 @@ app.use('/order', orderRouter);
 app.use("/user", userRouter);
 app.use("/parking", parkingRouter);
 
-// app.listen(port, () => {
-//   console.log(`Example app listening at http://localhost:${port}`)
-// })
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
 
 module.exports = app;

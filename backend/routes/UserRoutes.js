@@ -14,10 +14,10 @@ router.post("/add-user", async function (req, res) {
     }
 });
 
-router.get("/authenticate", async function (req, res) {
+router.post("/authenticate", async function (req, res) {
     console.log('GET authenticate user');
     try {
-        const isValid = await UserService.authenticate(req.userName, req.password);
+        const isValid = await UserService.authenticate(req.body.userName, req.body.password);
         if(isValid) {
             res.status(200).send();
         }

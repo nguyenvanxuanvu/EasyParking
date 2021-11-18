@@ -5,7 +5,7 @@ import { ParkingManagementPage } from '../ParkingManagement/ParkingManagementPag
 import AddParkingForm from '../AddParking/AddParkingForm'
 import { Sidebar } from '../../Sidebar';
 import { ManageOrderPage } from '../ManageOrder/ManageOrderPage'
-import PersPage from '../accInt/PersPage'
+import PersPage from '../Login/PersPage'
 import {
     BrowserRouter as Router,
     Switch,
@@ -14,7 +14,7 @@ import {
     Redirect
 } from "react-router-dom";
 
-export function Account() {
+export function Account({setAuth}) {
     return(
         <div class="container row">
             <div class="col-auto">
@@ -22,8 +22,8 @@ export function Account() {
             </div>
             <div class="col">
                 <Switch>
-                    <Route path="/account/" exact component={PersPage} />
-                    <Route path="/account/user-info" exact component={PersPage} />
+                    <Route path="/account/" exact render={props => <PersPage setAuth={setAuth}/>} />
+                    <Route exact path="/account/user-info" render={props => <PersPage setAuth={setAuth}/>} />
                     <Route path="/account/order-history" exact component={OrderHistory} />
                     <Route path="/account/order-info/:id" exact component={OrderInfo} />
                     <Route path="/account/parking-management" exact component={ParkingManagementPage} />

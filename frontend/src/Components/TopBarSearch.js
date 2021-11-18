@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { NavLink } from 'react-router-dom';
-export function TopBarSearch({ Data }) {
+import { useEffect } from "react";
+export function TopBarSearch({ auth, setAuth, Data }) {
   function uniq(a) {
     return a.sort().filter(function(item, pos, ary) {
         return !pos || item !== ary[pos - 1];
@@ -13,6 +14,7 @@ export function TopBarSearch({ Data }) {
     DataProvince.push(Data[i].province)
   }
   DataProvince =uniq(DataProvince)
+
   const [filteredData, setFilteredData] = useState([]);
   const [filteredDataProvince, setFilteredDataProvince] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
@@ -45,9 +47,14 @@ export function TopBarSearch({ Data }) {
     setWordEntered("");
     setFilteredDataProvince([]);
   };
+
+  function logOut() {
+    localStorage.removeItem("userName");
+    setAuth(false);
+  }
   return (
     <div class="row top-bar bg-primary p-2">
-      <h3 class="col-auto">Easy Parking</h3>
+      <h3 class="col-auto" ><a href="/" class="text-secondary">Easy Parking</a></h3>
 
       <div class="input-group col px-4">
         <div class="col">
@@ -122,9 +129,23 @@ export function TopBarSearch({ Data }) {
         </a>
       </div>
       <div class="col-auto d-flex align-items-center px-4">
-        <a href="/account">
-          <span class="text-secondary fw-bold">Tài khoản</span>
-        </a>
+        <div class="dropdown">
+          <button class="btn btn-secondary shadow-none dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Tài khoản
+          </button>
+          {auth ?
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="/account">Thông tin tài khoản</a></li>
+              <li><a class="dropdown-item" href="#" onClick={logOut}>Đăng xuất</a></li>
+            </ul>
+            :
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="/login">Đăng nhập</a></li>
+              <li><a class="dropdown-item" href="#">Đăng ký</a></li>
+            </ul>
+          }
+
+        </div>
       </div>
     </div>
   );

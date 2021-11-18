@@ -1,10 +1,5 @@
 const mongoose = require("mongoose");
 
-const VehicleSchema = new mongoose.Schema({
-   name: String,
-   unitPrice: Number,
-   quantity: {type: Number, default: 0}
-});
 
 const OrderSchema = new mongoose.Schema({
   times: {
@@ -12,17 +7,41 @@ const OrderSchema = new mongoose.Schema({
     default: [Date.now(), null, null, null, null]
   },
   customer: {
-    name: String,
-    phone: String,
-    email: String
+    type: { 
+      name: String,
+      phone: String,
+      email: String
+    },
+    required: true,
   },
   note: String,
-  startTime: Date,
-  endTime: Date,
-  vehicles: [VehicleSchema],
-  parkingId: mongoose.Types.ObjectId
+  startTime: {
+    type: Date,
+    required: true
+  },
+  endTime: {
+    type: Date,
+    required: true
+  },
+  price: {
+    type: [Number],
+    required: true
+  },
+  quantity: {
+    type: [Number],
+    required: true
+  },
+  parkingId: {
+    type: mongoose.Types.ObjectId,
+    required: true
+  },
+  userName: {
+    type: String,
+    required: true
+  } 
 });
 
-const OrderModel = mongoose.model("Order", OrderSchema);
+
+const OrderModel = mongoose.model("orders", OrderSchema);
 
 module.exports = OrderModel;

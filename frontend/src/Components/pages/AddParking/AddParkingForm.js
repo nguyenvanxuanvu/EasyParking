@@ -52,6 +52,7 @@ export default class AddParkingForm extends Component {
             txtPr_9_16: '',
             txtPr_32: ''
         };
+        this.USER_NAME = localStorage.getItem("userName");
     }
 
     city = listPos.map((city, index) => {
@@ -141,7 +142,7 @@ export default class AddParkingForm extends Component {
         return true;
     }
 
-    onHandleSubmit = (event) => {
+    onHandleSubmit = () => {
         console.log(this.state.uplImg);
         if (this.validateForm()) {
             console.log('successful');
@@ -155,7 +156,7 @@ export default class AddParkingForm extends Component {
                 "description": this.state.txtDesc,
                 "img": this.state.uplImg,// https://media-cdn.laodong.vn/storage/newsportal/2021/3/20/891104/Xe-Du-Tphcm-5.jpg?w=414&h=276&crop=auto&scale=both
                 "price": [Number(this.state.txtPr_xemay), Number(this.state.txtPr_4_7), Number(this.state.txtPr_9_16), Number(this.state.txtPr_32)],
-                "userName": "mhung"
+                "userName": this.USER_NAME
             };
             axios.post('/parking/add-parking', postData)
                 .then(() => window.location.href = 'http://localhost:3000/account/parking-management')

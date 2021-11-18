@@ -7,6 +7,23 @@ const OrderService = require("../services/OrderService.js");
 
 const router = express.Router();
 
+router.post('/add-order', async function(req, res){
+   console.log('POST add new order');
+    try {
+      const order = await OrderService.createOrder(req.body);
+      if(order) {
+        res.send(order);
+      }
+      else {
+        res.status(406).send(`Parking Id ${req.body.parkingId} not exist`);
+      }
+    } catch (error) {
+      res.status(500).send(error);
+    }
+});
+
+
+
 router.post('/addOrder', async function (req, res) {
   console.log('POST add new order');
   const order = new OrderModel(req.body);
@@ -20,16 +37,7 @@ router.post('/addOrder', async function (req, res) {
 });
 
 
-router.get("/parking", async function (req, res) {
-  console.log("GET parking");
-  const parkings = await ParkingModel.find({});
-  try {
-    res.send(parkings);
-  }
-  catch (err) {
-    res.status(500).send(err)
-  }
-})
+
 
 router.post("/add-user", async function (req, res) {
   console.log('POST add new user');
@@ -44,7 +52,7 @@ router.post("/add-user", async function (req, res) {
 })
 
 router.get("/order-management/:userName", async function (req, res) {
-  console.log('GET all order by user '+req.params.userName);
+  console.log('GET all orders from all my parkings');
   try {
     const orders = await OrderService.getAllOrderBy(req.params.userName);
     res.status(200).send(orders);
@@ -62,5 +70,30 @@ router.put("/change-state/:id", async function (req, res) {
     res.status(500).send(error);
   }
 })
+
+router.get("/order-history/:userName", async function (req, res) {
+  console.log("Get all my order history");
+  try {
+    const orders = await OrderService.getOrderHistory(req.params.userName);
+    res.status(200).send(orders);
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
+})
+
+router.get("/:orderId", async function(req, res) {
+  console.log("GET order from orderId");
+  console.log(req.params.orderId);
+  
+  try {
+    const order = await OrderService.getOrder(req.params.orderId);
+    res.status(200).send(order);
+  }
+  catch(error) {
+    res.status(500).send(error);
+  }
+
+});
 
 module.exports = router;

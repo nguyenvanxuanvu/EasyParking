@@ -38,7 +38,7 @@ class TopBar extends React.Component {
           
           return(
             
-             <TopBarSearch Data = {this.state.parks}></TopBarSearch>
+             <TopBarSearch auth={this.props.auth} setAuth={this.props.setAuth} Data = {this.state.parks}></TopBarSearch>
               
           )
         }

@@ -47,7 +47,7 @@ const SearchingCard = (props) => {
             <div class="row">
             <div class="button-fix">
             
-            <NavLink to="/reser" class="btn btn-light align-items-center">
+            <NavLink to={"/checkout/" + props.id} class="btn btn-light align-items-center">
               Đặt ngay
             </NavLink>
             </div>

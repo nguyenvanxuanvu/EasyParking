@@ -21,7 +21,7 @@ export function getOrderStatus(order) {
     order.times.map((time, idx) => {
         let status = "";
         let label= ORDER_STATUS_LABEL[idx];
-        if(time != "") {
+        if(time) {
             seek = idx + 1;
     }});
     if(seek == ORDER_STATUS_LABEL.length) {
@@ -32,7 +32,7 @@ export function getOrderStatus(order) {
     }
 }
 export function isCompleted(order) {
-    if(order.times[order.times.length - 1] != "") return true;
+    if(order.times[order.times.length - 1]) return true;
     else return false;
 }
 export function compareOrder(a, b) {

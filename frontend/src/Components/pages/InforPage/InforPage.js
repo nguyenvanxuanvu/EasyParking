@@ -51,7 +51,7 @@ export function InforPage({ Data }) {
               <h3>{parking.name}</h3>
             </div>
             <div class="col-auto">
-              <NavLink to="/reser" class="btn datngay">
+              <NavLink to={"/checkout/" + id} class="btn datngay">
                 Đặt ngay
               </NavLink>
             </div>

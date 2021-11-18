@@ -69,7 +69,7 @@ export function NewfeedPage() {
 
   useEffect(() => {
     axios
-      .get("/parking/parking-searching")
+      .get("http://localhost:8000/parking/parking-searching")
       .then((res) => {
         if (res.status == 200) {
           setProvince(res.data);
