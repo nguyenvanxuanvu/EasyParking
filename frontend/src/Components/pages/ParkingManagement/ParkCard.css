@@ -1,76 +1,75 @@
-.card {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 98%;
-    margin: 5px;
-    font-family: arial;
-    border-radius: 12px;
-    padding: 5px;
-  }
-  
-  /* On mouse-over, add a deeper shadow */
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
-  .card .info {
-    min-width: 550px;
-  }
+.park-card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffd748;
+  transition: 0.5s;
+  width: 98% !important;
+  /* height: 186px !important; */
+  margin: 5px;
+  font-family: arial;
+  border-radius: 12px;
+  padding: 5px;
+}
 
-  .img{
-      max-width: 200px;
-      height: 160px;
-      width: 100%;
-      float: left;
-      padding: 3px;
-      margin: 5px;
-      border-radius: 5%;
-      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  }
+/* On mouse-over, add a deeper shadow */
+.park-card:hover {
+  cursor: pointer;
+  transform: scale(1.04);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 4px 8px rgb(0 0 0 / 6%);
+}
 
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
+.img {
+  max-width: 200px;
+  height: 160px;
+  width: 100%;
+  float: left;
+  padding: 3px;
+  margin: 5px;
+  border-radius: 5%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
 
-  .title {
-    width: 300px;
-    font-weight: bold;
-    font-size: 24px;
-    color: #211931;
-    float: left;
-    text-align: left;
-    margin-left: 15px;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 
-  .order{
-    width: 300px;
-      color: green;
-      float: left;
-      font-size: 16px;
-      text-align: left;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-left: 15px;
-  }
+.title {
+  font-weight: bold;
+  color: #211931;
+  text-align: left;
+  margin-left: 15px;
+  margin-top: 6px;
 
-  .address{
-    width: 300px;
-      color: #000;
-      float: left;
-      font-size: 16px;
-      text-align: left;
-      line-height: 1.5em;
-      height: 3em; 
-      overflow: hidden;
-      margin-left: 15px;
-  }
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5em;
+  height: 1.5em;
+  white-space: nowrap;
+}
 
-  .card .btn{
-      float: left;
-  }
+.order {
+  color: green;
+  font-size: 16px;
+  text-align: left;
+  margin-left: 15px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5em;
+  height: 1.5em;
+  white-space: nowrap;
+}
+
+.address {
+  color: #000;
+  font-size: 16px;
+  text-align: left;
+  margin-left: 15px;
+
+  line-height: 1.5em;
+  height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

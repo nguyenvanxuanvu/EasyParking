@@ -19,7 +19,7 @@ router.post("/add-parking", async function (req, res) {
 });
 
 router.get("/parking-management/:user", async function (req, res) {
-    console.log('GET all parking');
+    console.log('GET all parking by user');
     try {
         const listParking = await ParkingService.getAllParkingBy(req.params.user);
         let uncheck = []

@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require('mongoose');
 const OrderModel = require("../models/OrderModels.js");
 const ParkingModel = require("../models/ParkingModel.js");
 const UserModel = require("../models/UserModel.js");
@@ -43,10 +44,20 @@ router.post("/add-user", async function (req, res) {
 })
 
 router.get("/order-management/:userName", async function (req, res) {
-  console.log('GET all order');
+  console.log('GET all order by user '+req.params.userName);
   try {
     const orders = await OrderService.getAllOrderBy(req.params.userName);
     res.status(200).send(orders);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+})
+
+router.put("/change-state/:id", async function (req, res) {
+  console.log('PUT data for '+req.params.id);
+  try {
+    const lastestOrder = await OrderService.updStatusOrderBy(mongoose.Types.ObjectId(req.params.id), req.body);
+    res.status(200).send(lastestOrder);
   } catch (error) {
     res.status(500).send(error);
   }

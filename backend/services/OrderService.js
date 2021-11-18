@@ -17,12 +17,20 @@ module.exports = {
     },
 
     getAllOrderBy: async function(userName){
-        const parks = await ParkingService.getAllParking(userName);
+        let parks = await ParkingService.getAllParkingBy(userName);
         let orders = [];
-        for(const park of parks){
-            const orderOfPark = await OrderModel.find({parkingId:park?._id});
+        for(let park of parks){
+            let orderOfPark = await OrderModel.find({parkingId:park?._id});
             orders.push(orderOfPark);
         }
-        return [parks, orders];
+
+        let zip = parks.map((park, index)=>[park.name,orders[index]]);
+        zip = zip.filter(item => item[1]?.length!==0);
+        return zip;
+    },
+
+    updStatusOrderBy: async function (id, newStatus) {
+        let doc = await OrderModel.findOneAndUpdate({_id:id}, {times:newStatus}, {new:true});
+        return doc;
     }
 }
