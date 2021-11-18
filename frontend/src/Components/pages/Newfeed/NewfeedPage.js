@@ -5,7 +5,7 @@ import SearchingCard from "../Searching/SearchingCard";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { removeVI } from "jsrmvi";
 const USER_GUIDE = [
   [
     "https://thumbs.dreamstime.com/b/connected-car-parking-sharing-service-remote-controlled-via-smartphone-app-vector-illustration-autonomous-wireless-hands-154583213.jpg",
@@ -69,7 +69,7 @@ export function NewfeedPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/parking/parking-searching")
+      .get("/parking/parking-searching")
       .then((res) => {
         if (res.status == 200) {
           setProvince(res.data);
@@ -91,12 +91,14 @@ export function NewfeedPage() {
   }
   DataProvince = uniq(DataProvince);
   DataProvince = DataProvince.sort((a,b)=>getNumCity(b)-getNumCity(a))
-  DataParkingOustanding = theData.sort((a,b) => average(b.feedback.map((each)=>{
-    return each.rate;
-  })) - average(a.feedback.map((each)=>{
-    return each.rate;
-  })) )
+  
+
   var DataProvincefour = DataProvince.slice(0,4);
+  var DataParkingOustanding = theData.filter((each)=>{
+    return average(each.feedback.map((e)=>{
+          return e.rate
+    })) >= 4.8
+  })
   var DataParkingOustandingfour = DataParkingOustanding.slice(0,4);
   return (
     <div>
@@ -109,7 +111,7 @@ export function NewfeedPage() {
             Đặt chỗ gửi xe nhanh chóng, tiện lợi, thanh toán dễ dàng
           </h3>
           <h3 class="PlaceName text-center">
-            <NavLink to="/SignIn" class="text-primary">
+          <NavLink to="/SignIn" class="text-primary">
               Đăng nhập
             </NavLink>{" "}
             hoặc{" "}
@@ -168,7 +170,7 @@ export function NewfeedPage() {
                           src={parking.img[0]}
                           star={average(parking.feedback.map((each)=>{return each.rate}))}
                           numEvaluate={parking.feedback.length}
-                          address={parking.street}
+                          address={parking.ward+', '+parking.district+', '+parking.province}
                           type={GetType(parking)}
                         ></SearchingCard>
                       </div>

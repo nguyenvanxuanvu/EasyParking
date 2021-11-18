@@ -1,6 +1,6 @@
 import "./InforPage.css";
 import { CostTable } from "./CostTable";
-import { ListReview } from "./ListReview";
+import  ListReview  from "./ListReview";
 import { NavLink } from "react-router-dom";
 import ImageSlider from "./ImageSlider";
 import { useParams } from "react-router";
@@ -28,6 +28,8 @@ export function InforPage({ Data }) {
   ];
   var idx = 0;
   var d = 0;
+  var pk;
+  var theid =''
   var img = [];
   var price = [];
   var feedback = [];
@@ -38,6 +40,7 @@ export function InforPage({ Data }) {
       img = each.img;
       price = each.price;
       feedback = each.feedback;
+      
     }
     d = d + 1;
   }
@@ -51,7 +54,7 @@ export function InforPage({ Data }) {
               <h3>{parking.name}</h3>
             </div>
             <div class="col-auto">
-              <NavLink to={"/checkout/" + id} class="btn datngay">
+            <NavLink to={"/checkout/" + id} class="btn datngay">
                 Đặt ngay
               </NavLink>
             </div>
@@ -95,7 +98,7 @@ export function InforPage({ Data }) {
           </div>
           <div class="col">
             <div class="Container">
-              <ListReview data={feedback} />
+              <ListReview data={feedback} id={id}/>
             </div>
           </div>
         </div>

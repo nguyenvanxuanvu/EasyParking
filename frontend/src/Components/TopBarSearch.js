@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { NavLink } from 'react-router-dom';
 import { useEffect } from "react";
+import { removeVI, DefaultOption } from 'jsrmvi';
 export function TopBarSearch({ auth, setAuth, Data }) {
   function uniq(a) {
     return a.sort().filter(function(item, pos, ary) {
@@ -73,7 +74,7 @@ export function TopBarSearch({ auth, setAuth, Data }) {
                 <div className="dataResult">
                   {filteredDataProvince.slice(0, 2).map((value, key) => {
                     return (
-                      <NavLink to={"/Searching/"+value} class="text-decoration-none text-secondary " onClick={clearInput}>
+                      <NavLink to={"/Searching/"+ removeVI(value)} class="text-decoration-none text-secondary " onClick={clearInput}>
                       
                         <p>
                           {value}{" "}

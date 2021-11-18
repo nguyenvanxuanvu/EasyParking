@@ -20,7 +20,7 @@ import { Cart } from './Components/pages/Cart/Cart';
 import { Account } from './Components/pages/Account/Account';
 import { CartItemDetail } from './Components/pages/CartItemDetail/CartItemDetail';
 import { NewfeedPage } from './Components/pages/Newfeed/NewfeedPage';
-import AllSearchingPage from './Components/pages/Searching/AllSearchingPage'
+import AllSearchingPage  from './Components/pages/Searching/AllSearchingPage'
 import  AllInforPage  from './Components/pages/InforPage/AllInforPage';
 import ScrollToTop from 'react-router-scroll-top'
 import Login from './Components/pages/Login/Login';

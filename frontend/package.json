@@ -17,6 +17,7 @@
     "bootstrap-sass": "^3.3.7",
     "date-fns": "^2.25.0",
     "jquery": "^3.6.0",
+    "jsrmvi": "^1.0.0",
     "mapbox-gl": "^2.6.0",
     "moment": "^2.29.1",
     "node-sass": "^6.0.1",
