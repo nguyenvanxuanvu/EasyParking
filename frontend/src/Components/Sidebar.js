@@ -9,7 +9,7 @@ export function Sidebar(props) {
     });
     console.log(props.path);
     return (
-    <div className="sidebar bg-secondary p-3 h-100">
+    <div className="sidebar bg-secondary p-4 h-100">
         <ul class="px-0">
         {SidebarDatas.map((item, index) => {
             return (SidebarItem({path: item.link,

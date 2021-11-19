@@ -30,3 +30,12 @@
 .row.h-100.p-3{
   padding: 0px !important;
 }
+.abccc{
+  position: absolute !important;
+  z-index :2;
+  padding-top: 10px !important;
+}
+.row .h-100 .p-0{
+  position: absolute !important;
+  padding-top: 10px !important;
+}
