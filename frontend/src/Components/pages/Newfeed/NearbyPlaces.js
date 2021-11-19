@@ -45,16 +45,6 @@ export default class NearbyPlaces extends React.PureComponent {
     };
   }
 
-  position = async () => {
-    await navigator.geolocation.getCurrentPosition(
-      position => this.setState({ 
-        userLatitude: position.coords.latitude, 
-        userLongitude: position.coords.longitude
-      }, function(){console.log(this.state.userLongitude)}), 
-      err => console.log(err)
-    );
-  }
-
   async componentDidMount() {
     if (navigator.geolocation) {
       navigator.permissions
