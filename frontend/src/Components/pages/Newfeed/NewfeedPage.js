@@ -116,7 +116,7 @@ export function NewfeedPage() {
             Đặt chỗ gửi xe nhanh chóng, tiện lợi, thanh toán dễ dàng
           </h3>
           <h3 class="PlaceName text-center">
-          <NavLink to="/SignIn" class="text-primary">
+          <NavLink to="/login" class="text-primary">
               Đăng nhập
             </NavLink>{" "}
             hoặc{" "}
