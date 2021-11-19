@@ -160,7 +160,7 @@ export function NewfeedPage() {
             </div>
             <h4 class="PlaceName pt-4">Tìm kiếm theo địa điểm</h4>
             <div class="pt-4">
-              <OptionButtonGroup data={DataProvince} addressList={addressList}></OptionButtonGroup>
+              <OptionButtonGroup data={DataProvince} addressList={addressList} all={theData}></OptionButtonGroup>
             </div>
             <h4 class="PlaceName pt-4">Nổi bật</h4>
             <div class="pt-0">
