@@ -97,9 +97,14 @@ export function NewfeedPage() {
   var DataParkingOustanding = theData.filter((each)=>{
     return average(each.feedback.map((e)=>{
           return e.rate
-    })) >= 4.8
+    })) >= 4.5
   })
   var DataParkingOustandingfour = DataParkingOustanding.slice(0,4);
+  var addressList = [];
+  for (let i in theData){
+    addressList.push(theData[i].street + " " + theData[i].ward + " " + theData[i].district + " " + theData[i].province)
+  }
+  
   return (
     <div>
       <div class="pt-5 ps-5">
@@ -155,7 +160,7 @@ export function NewfeedPage() {
             </div>
             <h4 class="PlaceName pt-4">Tìm kiếm theo địa điểm</h4>
             <div class="pt-4">
-              <OptionButtonGroup data={DataProvince}></OptionButtonGroup>
+              <OptionButtonGroup data={DataProvince} addressList={addressList}></OptionButtonGroup>
             </div>
             <h4 class="PlaceName pt-4">Nổi bật</h4>
             <div class="pt-0">

@@ -30,7 +30,11 @@ export function TopBarSearch({ auth, setAuth, Data }) {
         (value.name +" " +value.ward +" " +value.district + " " +value.province).toLowerCase().includes(searchWord.toLowerCase()) ||
         (value.name + " " + value.province).toLowerCase().includes(searchWord.toLowerCase()) ||
         (value.name + " " + value.ward).toLowerCase().includes(searchWord.toLowerCase()) ||
-        (value.name + " " + value.district).toLowerCase().includes(searchWord.toLowerCase())
+        (value.name + " " + value.district).toLowerCase().includes(searchWord.toLowerCase()) ||
+        (removeVI(value.name) +" " +removeVI(value.ward) +" " +removeVI(value.district) + " " +removeVI(value.province)).toLowerCase().includes(removeVI(searchWord.toLowerCase())) ||
+        (removeVI(value.name) + " " + removeVI(value.province)).toLowerCase().includes(removeVI(searchWord.toLowerCase())) ||
+        (removeVI(value.name) + " " + removeVI(value.ward)).toLowerCase().includes(removeVI(searchWord.toLowerCase())) ||
+        (removeVI(value.name) + " " + removeVI(value.district)).toLowerCase().includes(removeVI(searchWord.toLowerCase()))
       );
     });
 
@@ -54,6 +58,7 @@ export function TopBarSearch({ auth, setAuth, Data }) {
     setAuth(false);
   }
   return (
+    <div>
     <div class="row top-bar bg-primary p-2">
       <h3 class="col-auto" ><a href="/" class="text-secondary">Easy Parking</a></h3>
 
@@ -70,22 +75,23 @@ export function TopBarSearch({ auth, setAuth, Data }) {
             aria-describedby="search-addon"
           />
           {
-               filteredDataProvince.length !== 0 && (
-                <div className="dataResult">
-                  {filteredDataProvince.slice(0, 2).map((value, key) => {
-                    return (
-                      <NavLink to={"/Searching/"+ removeVI(value)} class="text-decoration-none text-secondary " onClick={clearInput}>
+              //  filteredDataProvince.length !== 0 && (
+                 
+              //   <div className="dataResult">
+              //     {filteredDataProvince.slice(0, 2).map((value, key) => {
+              //       return (
+              //         <NavLink to={"/Searching/"+ removeVI(value)} class="text-decoration-none text-secondary " onClick={clearInput}>
                       
-                        <p>
-                          {value}{" "}
-                        </p>
-                      </NavLink>
-                    );
-                  })}
-                </div>
-              )
+              //           <p>
+              //             {value}{" "}
+              //           </p>
+              //         </NavLink>
+              //       );
+              //     })}
+              //   </div>
+              // )
           } 
-          {filteredData.length !== 0 && (
+          {/* {filteredData.length !== 0 && (
             <div className="dataResult">
               {filteredData.slice(0, 4).map((value, key) => {
                 return (
@@ -104,7 +110,7 @@ export function TopBarSearch({ auth, setAuth, Data }) {
                 );
               })}
             </div>
-          )}
+          )} */}
           
         </div>
         <div class="row">
@@ -149,5 +155,75 @@ export function TopBarSearch({ auth, setAuth, Data }) {
         </div>
       </div>
     </div>
+    <div class=" ps-3">
+    
+    <div class="ps-5">
+    <div class=" ps-5">
+    <div class=" ps-5">
+    <div class = " ps-5">
+    <div class="col-9 border-radius">
+    {(filteredDataProvince.length !== 0 || filteredData.length !== 0) && <div class="container-lg p-3 border pe-5 my-1 bg-primary bg-lighten-xl text-white">  
+            
+          {filteredDataProvince.length !== 0 && (
+                 
+                  <div class="dataret">
+                  {filteredDataProvince.slice(0, 2).map((value, key) => {
+                    return (
+                      <NavLink to={"/Searching/"+ removeVI(value)} class="text-decoration-none text-secondary " onClick={clearInput}>
+                        
+                        <p>
+                          {value}{" "}
+                        </p>
+                        
+                      </NavLink>
+                    );
+                  })}
+                  </div>
+                
+              )
+                
+            }
+     
+           
+
+            { filteredData.length !== 0 && (
+              
+              <div class="dataret">
+              {filteredData.slice(0, 4).map((value, key) => {
+                return (
+                  <NavLink to={"/Info/" + value._id} class="text-decoration-none text-secondary " onClick={clearInput}>
+                   
+                    <p>
+                      {value.name +
+                        ", " +
+                        value.ward +
+                        ", " +
+                        value.district +
+                        ", " +
+                        value.province}{" "}
+                    </p>
+                  </NavLink>
+                );
+              })
+              
+            }
+            </div>
+            )} 
+
+</div>}
+</div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    
+    
+    
+  
+    
+   
   );
 }
