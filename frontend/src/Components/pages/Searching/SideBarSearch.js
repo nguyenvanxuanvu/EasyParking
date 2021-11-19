@@ -3,8 +3,10 @@ import "./SideBarSearch.css";
 export function SideBarSearch() {
   
   return (
-    <div className="sidebar bg-secondary p-4 h-100">
-      <h5 class="card-title">Chọn lọc theo</h5>
+    
+    <div className="sidebar bg-secondary p-5 h-100">
+      <div class="tl">
+      <h4 class="card-title">Chọn lọc theo</h4>
       <h6 class="card-title pt-4">Loại xe</h6>
       <div class="form-check">
         <input
@@ -56,6 +58,7 @@ export function SideBarSearch() {
       </div>
 
       
+    </div>
     </div>
   );
 }

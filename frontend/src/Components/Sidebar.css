@@ -1,3 +1,11 @@
 .sidebar-item:hover {
     background-color: #4A4A4A;
 }
+.sidebar{
+    
+    min-height: 100vh;
+    top: 57px;
+    bottom: 0;
+    left: 0;
+    
+}

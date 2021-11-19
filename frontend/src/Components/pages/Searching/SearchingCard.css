@@ -29,6 +29,7 @@
 }
 .widthcard{
     height: 440px !important;
+    width: 320px !important;
 }
 .button-fix{
     position: absolute;

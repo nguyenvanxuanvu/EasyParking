@@ -273,7 +273,7 @@ class SearchingPage extends Component {
               </label>
             </div>
           </div>
-          );
+          
           {/* ////// */}
         </div>
         <div class="col">
@@ -344,7 +344,7 @@ class SearchingPage extends Component {
                       if (removeVI(parking.province) === this.props.id)
                         return (
                           <div class="col-lg-4 d-flex align-items-stretch">
-                            <div class="pt-3 pe-3">
+                            <div class="pt-5 pe-3">
                               <SearchingCard
                                 class="searchcard"
                                 id={parking._id}

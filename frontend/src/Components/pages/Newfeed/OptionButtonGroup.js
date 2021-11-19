@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { FindByCity } from './FindByCity';
-import { NearMe } from './Nearme';
+
 import './OptionButtonGroup.css';
 
 const OptionButtonGroup = (props) => {
     const [active, setActive] = useState("");
-
     return (
         <div>
             <div class="btn-toolbar justify-content-between pe-5" role="toolbar" aria-label="Toolbar with button groups">
@@ -22,7 +21,7 @@ const OptionButtonGroup = (props) => {
             </div>
             <div>
                 {active === "FirstCard" && <FindByCity data={props.data}/>}
-                {active === "SecondCard" && <NearMe/>}
+                {/* {active === "SecondCard" && <NearbyPlaces addressList={props.addressList}></NearbyPlaces>} */}
             </div>
         </div>
     )
