@@ -64,7 +64,7 @@ export default class NearbyPlaces extends React.PureComponent {
           };
         });
     } else {
-      alert("Sorry Not available!");
+      alert("Xin lỗi! Thiết bị của bạn không hỗ trợ chức năng định vị!");
     }
     var longitude = [Number];
     var latitude = [Number];
