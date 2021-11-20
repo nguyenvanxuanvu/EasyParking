@@ -6,34 +6,7 @@ import {
 } from 'react-router-dom';
 import './AddParkingForm.css';
 
-const listPos = [
-    {
-        city: 'TP.Hồ Chí Minh',
-        listDistrict: [
-            {
-                district: 'TP.Thủ Đức',
-                listWard: ['Linh Trung', 'Linh Tây']
-            },
-            {
-                district: 'Quận Bình Thạnh',
-                listWard: ['Phường 14', 'Phường 3']
-            },
-        ]
-    },
-    {
-        city: 'Bình Dương',
-        listDistrict: [
-            {
-                district: 'TP.Thủ Dầu Một',
-                listWard: []
-            },
-            {
-                district: 'TX.Dĩ An',
-                listWard: []
-            },
-        ]
-    }
-];
+const listPos = require('./locationData.json');
 
 
 export default class AddParkingForm extends Component {
@@ -57,7 +30,7 @@ export default class AddParkingForm extends Component {
 
     city = listPos.map((city, index) => {
         var res = '';
-        res = <option value={index}>{city.city}</option>
+        res = <option value={index}>{city.Name}</option>
         return res;
     });
 
@@ -65,8 +38,8 @@ export default class AddParkingForm extends Component {
         if (city !== '') {
             var selCity = parseInt(city);
             return (
-                listPos[selCity].listDistrict.map((district, index) => {
-                    return <option value={index}>{district.district}</option>
+                listPos[selCity].Districts.map((district, index) => {
+                    return <option value={index}>{district.Name}</option>
                 })
             );
         }
@@ -81,8 +54,8 @@ export default class AddParkingForm extends Component {
             if (district !== '') {
                 var selDist = parseInt(district);
                 return (
-                    listPos[selCity].listDistrict[selDist].listWard.map((ward, index) => {
-                        return <option value={index}>{ward}</option>
+                    listPos[selCity].Districts[selDist].Wards.map((ward, index) => {
+                        return <option value={index}>{ward.Name}</option>
                     })
                 );
             }
@@ -150,9 +123,9 @@ export default class AddParkingForm extends Component {
             var postData = {
                 "name": this.state.txtName,
                 "street": this.state.txtAddr,
-                "ward": listPos[this.state.cbCity].listDistrict[this.state.cbDistrict].listWard[this.state.cbWard],
-                "district": listPos[this.state.cbCity].listDistrict[this.state.cbDistrict].district,
-                "province": listPos[this.state.cbCity].city,
+                "ward": listPos[this.state.cbCity].Districts[this.state.cbDistrict].Wards[this.state.cbWard].Name,
+                "district": listPos[this.state.cbCity].Districts[this.state.cbDistrict].Name,
+                "province": listPos[this.state.cbCity].Name,
                 "description": this.state.txtDesc,
                 "img": this.state.uplImg,// https://media-cdn.laodong.vn/storage/newsportal/2021/3/20/891104/Xe-Du-Tphcm-5.jpg?w=414&h=276&crop=auto&scale=both
                 "price": [Number(this.state.txtPr_xemay), Number(this.state.txtPr_4_7), Number(this.state.txtPr_9_16), Number(this.state.txtPr_32)],
@@ -168,7 +141,6 @@ export default class AddParkingForm extends Component {
     }
 
     render() {
-        
         return (
             <div class="col-auto addParkForm">
                 <h2>Thêm bãi đỗ</h2>

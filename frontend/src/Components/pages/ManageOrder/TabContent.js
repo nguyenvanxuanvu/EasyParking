@@ -368,7 +368,7 @@ export function TabContent(props) {
     let setNewStatus = (order) => {
         let res = order?.times;
         for (var i = 0; i < 4; i++) {
-            if (res[i] == null) {
+            if (!res[i]) {
                 res[i] = new Date().toLocaleString();
                 break;
             }
@@ -389,14 +389,18 @@ export function TabContent(props) {
 
     let cancelOrder = (order) => {
         let res = order?.times;
-        res[4] = new Date().toLocaleString();
-        return res;
+        if(!res[4]){
+            res[4] = new Date().toLocaleString();
+            return res;
+        }
+        return '';
     }
 
     let cancel = () => {
         let arr = JSON.parse(JSON.stringify(checkedOrder));
         for (let order of arr) {
             let newStt = cancelOrder(order);
+            if(newStt==='') continue;
             axios.put(`/order/change-state/${order?._id}`, newStt);
         }
         clearCheckbox();
