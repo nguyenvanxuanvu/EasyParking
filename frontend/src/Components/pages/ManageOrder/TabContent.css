@@ -1,37 +1,42 @@
-
 .form-select {
-    height: fit-content;
-    margin: 5px;
-    margin-right: 15px;
-    width: fit-content;
-  }
-  .form-label {
-    margin: 5px;
-    margin-top: 12px;
-    width: fit-content;
-    white-space: nowrap;
-    text-overflow: clip;
-  }
-  .order-search {
-    height: fit-content;
-    width: 100%;
-    margin: 5px;
-  }
-  .btn-order{
-      margin: 10px;
-  }
-  .park-name{
-      font-weight: bold;
-      color: blue;
-  }
-  .time-left{
-      color: green;
-  }
-  .time-late{
-      color: red;
-  }
-  .total-money{
-      font-weight: bold;
-      color: red;
-      text-align: right;
-  }
+  height: fit-content;
+  margin: 5px;
+  margin-right: 15px;
+  width: fit-content;
+}
+.form-label {
+  margin: 5px;
+  margin-top: 12px;
+  width: fit-content;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+.order-search {
+  height: fit-content;
+  width: 100%;
+  margin: 5px;
+}
+.btn-order {
+  margin: 10px;
+}
+.park-name {
+  font-weight: bold;
+  color: blue;
+}
+.time-left {
+  color: green;
+}
+.time-late {
+  color: red;
+}
+.time-done {
+    color: orangered;
+}
+.time-cancel {
+    color: black;
+}
+.total-money {
+  font-weight: bold;
+  color: red;
+  text-align: right;
+}
