@@ -4,13 +4,14 @@ import Button from "../../Button";
 import ParkCard from "./ParkCard";
 import './ParkingManagementPage.css'
 import { Link } from 'react-router-dom';
+import Loading from '../Loading/Loading'
 
 export class ParkingManagementPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            parks: [],
+            parks: null,
             uncheck: []
         };
         this.USER_NAME = localStorage.getItem("userName");
@@ -36,6 +37,8 @@ export class ParkingManagementPage extends Component {
             });
         }
 
+        if(!this.state.parks)
+            return <Loading/>
         return (
             <div>
                 <span class="pageTitle">Quản lý các bãi đỗ của tôi</span>

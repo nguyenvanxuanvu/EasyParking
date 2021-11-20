@@ -45,10 +45,11 @@ function App() {
         <Router>
         <ScrollToTop>
             <div class="h-100">
-                <div class="row px-2 sticky-top">
+                <div class="row px-2 fixed-top">
                     <TopBar auth={auth} setAuth={setAuth} />
                 </div>
-                <div class="row h-100 p-0">
+                <div class="pt-2">
+                <div class="row h-100 pt-5">
                     <Switch>
                         <Route exact path="/loading" component={Loading}/>
                         <Route exact path="/" render={props => <NewfeedPage/>}/>
@@ -66,6 +67,7 @@ function App() {
                         <Route path="/payment/fail" component={PaymentFail}/>
                     </Switch>
                 </div>
+            </div>
             </div>
             </ScrollToTop>
         </Router>

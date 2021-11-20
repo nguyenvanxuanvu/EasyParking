@@ -19,7 +19,7 @@ class ListReview extends Component {
     this.state = { data: [], star: 1, content: "" };
 
     this.time = new Date();
-    this.name = "@name";
+    this.name = "Ẩn danh"
     // Binding this keyword
     this.handleRating = this.handleRating.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -35,7 +35,7 @@ class ListReview extends Component {
 
     this.flag = false;
     var each = [{
-      userName: this.name,
+      userName: localStorage.getItem("userName")? localStorage.getItem("userName"): "Ẩn danh",
       content: this.state.content,
       time: new Date(),
       rate: this.state.star,
@@ -55,7 +55,7 @@ class ListReview extends Component {
       content: this.state.content,
     });
     
-    this.handleRating(0);
+    this.handleRating(1);
     
   }
   handleContent(value) {
@@ -116,7 +116,7 @@ class ListReview extends Component {
                 <Review
                   name={review.userName}
                   time={Moment(review.time).utcOffset('+07:00')
-                  .format('hh:mm DD/MM/YYYY')
+                  .format('hh:mm a DD/MM/YYYY')
                  }
                   star={review.rate}
                   content={review.content}
@@ -132,7 +132,7 @@ class ListReview extends Component {
                 <Review
                   name={review.userName}
                   time={Moment(review.time).utcOffset('+07:00')
-                  .format('hh:mm DD/MM/YYYY')}
+                  .format('hh:mm a DD/MM/YYYY')}
                   star={review.rate}
                   content={review.content}
                   avasrc={
@@ -157,7 +157,7 @@ class ListReview extends Component {
                 </div>
                 <div class="col-8 ps-1 pt-3">
                 
-                  <div class="nameReviewer">@name</div>
+                  <div class="nameReviewer">{localStorage.getItem("userName")? localStorage.getItem("userName"): "Ẩn danh"}</div>
 
                   <div class="row">
                     <div class="col-auto">

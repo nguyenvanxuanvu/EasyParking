@@ -1,7 +1,7 @@
 .park-card {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background-color: #ffd748;
+  background-color: #ffffff;
   transition: 0.5s;
   width: 98% !important;
   /* height: 186px !important; */
@@ -23,9 +23,10 @@
   height: 160px;
   width: 100%;
   float: left;
-  padding: 3px;
   margin: 5px;
+  margin-right: 10px;
   border-radius: 5%;
+  border: 2px solid #211931;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 

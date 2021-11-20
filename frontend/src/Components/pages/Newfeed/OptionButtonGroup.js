@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { FindByCity } from './FindByCity';
-import { NearMe } from './Nearme';
+import NearbyPlaces from './NearbyPlaces';
 import './OptionButtonGroup.css';
 
 const OptionButtonGroup = (props) => {
     const [active, setActive] = useState("");
-
+    const [lat, setLat] = useState(0);
+    const [long, setLong] = useState(0);
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(function(position){
+            setLong(position.coords.longitude);
+            setLat(position.coords.latitude);
+        }
+        )},[]
+    )
     return (
         <div>
             <div class="btn-toolbar justify-content-between pe-5" role="toolbar" aria-label="Toolbar with button groups">
@@ -22,7 +30,7 @@ const OptionButtonGroup = (props) => {
             </div>
             <div>
                 {active === "FirstCard" && <FindByCity data={props.data}/>}
-                {active === "SecondCard" && <NearMe/>}
+                {active === "SecondCard" && <NearbyPlaces addressList={props.addressList} longitude={long} latitude={lat} all={props.all}></NearbyPlaces>}
             </div>
         </div>
     )

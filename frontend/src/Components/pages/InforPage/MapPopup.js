@@ -12,11 +12,13 @@ export default function InfoModal(props){
       <button type="submit" class="btn" style={{color: 'red'}} onClick={handleShow}>
         Xem bản đồ
       </button>
-      <Modal show={show} onHide={handleClose} fullscreen>
+      <Modal size="lg" show={show} onHide={handleClose} aria-labelledby="example-modal-sizes-title-lg">
         <Modal.Header closeButton>
-          <Modal.Title>{props.name}</Modal.Title>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            {props.name}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{overflowY: 'auto', marginRight: '15px'}}>
             <Map address={props.address}></Map>
         </Modal.Body>
       </Modal>
