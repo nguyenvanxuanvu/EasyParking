@@ -107,7 +107,7 @@ export function TabContent(props) {
 
             hours = Math.floor(t / (1000 * 60 * 60));
 
-            res = "Trễ xác nhận " + days + " ngày " + hours + " giờ, từ " + time.getHours() + ":" + time.getMinutes() + " "
+            res = "Trễ xác nhận " + days + " ngày " + hours + " giờ, từ " + time.getHours() + "h" + time.getMinutes() + " "
                 + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear();
         }
         else {
@@ -116,7 +116,7 @@ export function TabContent(props) {
 
             hours = Math.floor(t / (1000 * 60 * 60));
 
-            res = "Hạn xác nhận còn " + days + " ngày " + hours + " giờ, từ " + time.getHours() + ":" + time.getMinutes() + " "
+            res = "Hạn xác nhận còn " + days + " ngày " + hours + " giờ, từ " + time.getHours() + "h" + time.getMinutes() + " "
                 + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear();
         }
         return [res, t];
@@ -137,7 +137,7 @@ export function TabContent(props) {
 
             hours = Math.floor(t / (1000 * 60 * 60));
 
-            res = "Đã trễ " + days + " ngày " + hours + " giờ, từ " + time.getHours() + ":" + time.getMinutes() + " "
+            res = "Đã trễ " + days + " ngày " + hours + " giờ, từ " + time.getHours() + "h" + time.getMinutes() + " "
                 + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear();
         }
         else {
@@ -146,7 +146,7 @@ export function TabContent(props) {
 
             hours = Math.floor(t / (1000 * 60 * 60));
 
-            res = "Thời gian đến lúc đỗ là " + days + " ngày " + hours + " giờ, từ " + time.getHours() + ":" + time.getMinutes() + " "
+            res = "Thời gian đến lúc đỗ là " + days + " ngày " + hours + " giờ, từ " + time.getHours() + "h" + time.getMinutes() + " "
                 + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear();
         }
         return [res, t];
@@ -167,7 +167,7 @@ export function TabContent(props) {
 
             hours = Math.floor(t / (1000 * 60 * 60));
 
-            res = "Quá hạn lấy xe " + days + " ngày " + hours + " giờ, từ " + time.getHours() + ":" + time.getMinutes() + " "
+            res = "Quá hạn lấy xe " + days + " ngày " + hours + " giờ, từ " + time.getHours() + "h" + time.getMinutes() + " "
                 + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear();
         }
         else {
@@ -176,7 +176,7 @@ export function TabContent(props) {
 
             hours = Math.floor(t / (1000 * 60 * 60));
 
-            res = "Thời gian đỗ còn " + days + " ngày " + hours + " giờ, đến " + time.getHours() + ":" + time.getMinutes() + " "
+            res = "Thời gian đỗ còn " + days + " ngày " + hours + " giờ, đến " + time.getHours() + "h" + time.getMinutes() + " "
             + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear();
         }
         return [res,t];
@@ -186,7 +186,7 @@ export function TabContent(props) {
     let checkDone = (doneTime) => {
         var time = new Date(doneTime);
         // time.setHours(time.getHours() - 7);
-        return "Đã hoàn tất vào "+ time.getHours() + ":" + time.getMinutes() + " "
+        return "Đã hoàn tất vào "+ time.getHours() + "h" + time.getMinutes() + " "
         + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear();
     }
 
@@ -194,7 +194,7 @@ export function TabContent(props) {
     let checkCancel = (cancelTime) => {
         var time = new Date(cancelTime);
         // time.setHours(time.getHours() - 7);
-        return "Đã hủy đơn vào "+ time.getHours() + ":" + time.getMinutes() + " "
+        return "Đã hủy đơn vào "+ time.getHours() + "h" + time.getMinutes() + " "
         + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear();
     }
 
@@ -310,8 +310,8 @@ export function TabContent(props) {
                         var text = removeVI(order[0], { replaceSpecialCharacters: false });
                         if (text.replace(/\s/g, '').search(filterValue) >= 0) res.push(order);
                         break;
-                    case 'Hạn xác nhận':
-                        var text = removeVI(checkTime(order[1]?.times[0]), { replaceSpecialCharacters: false });
+                    case 'Hạn xử lý':
+                        var text = removeVI(checkTime(order[1]), { replaceSpecialCharacters: false });
                         if (text.replace(/\s/g, '').search(filterValue) >= 0) res.push(order);
                         break;
                     case 'Thông tin':
@@ -320,7 +320,7 @@ export function TabContent(props) {
                             t += i;
                         }
                         var text = removeVI(t, { replaceSpecialCharacters: false });
-                        if (text.replace(/\s/g, '').toLowerCase().search(filterValue) >= 0) res.push(order);
+                        if (text.replace(/\s/g, '').search(filterValue) >= 0) res.push(order);
                         break;
                     case 'Tổng tiền':
                         var text = removeVI(totalPrice(order[1]?.price, order[1]?.quantity).toString(), { replaceSpecialCharacters: false });
@@ -416,7 +416,7 @@ export function TabContent(props) {
                 <select class="form-select" aria-label="Default select example" onChange={(e) => setFilterOption(e.target.value)}>
                     <option value='Mã đơn hàng'>Mã đơn hàng</option>
                     <option value='Tên bãi đỗ'>Tên bãi đỗ</option>
-                    <option value='Hạn xác nhận'>Hạn xác nhận</option>
+                    <option value='Hạn xử lý'>Hạn xử lý</option>
                     <option value='Thông tin'>Thông tin</option>
                     <option value='Tổng tiền'>Tổng tiền</option>
                 </select>
@@ -424,8 +424,8 @@ export function TabContent(props) {
                     placeholder="Tìm kiếm đơn hàng" onChange={(e) => setFilterValue(e.target.value)} />
             </div>
             <div style={{ display: 'flex', float: 'right' }}>
-                <div style={props.tabType >= 4 ? { display: "none" } : {}} className="btn-order" ><Button bgcolor="#ffd53b" btnName="Xác nhận hàng loạt" onClick={accept} /></div>
-                <div style={props.tabType == 5 ? { display: "none" } : {}} className="btn-order"><Button bgcolor="#211931" btnName="Hủy hàng loạt" onClick={cancel} /></div>
+                <div style={props.tabType >= 4 ? { display: "none" } : {}} className="btn-order" ><Button bgcolor="#ffd53b" btnName="Xử lý đơn hàng" onClick={accept} /></div>
+                <div style={props.tabType == 5 ? { display: "none" } : {}} className="btn-order"><Button bgcolor="#211931" btnName="Hủy đơn hàng" onClick={cancel} /></div>
             </div>
             <table class="table">
                 <thead>
@@ -433,7 +433,7 @@ export function TabContent(props) {
                         <th scope="col">Chọn</th>
                         <th scope="col">Mã đơn hàng</th>
                         <th scope="col">Tên bãi đỗ</th>
-                        <th scope="col">Hạn xác nhận</th>
+                        <th scope="col">Hạn xử lý</th>
                         <th scope="col">Thông tin</th>
                         <th scope="col">Tổng tiền</th>
                     </tr>

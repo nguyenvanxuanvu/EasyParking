@@ -116,7 +116,7 @@ export function NewfeedPage() {
             Đặt chỗ gửi xe nhanh chóng, tiện lợi, thanh toán dễ dàng
           </h3>
           <h3 class="PlaceName text-center">
-          <NavLink to="/SignIn" class="text-primary">
+          <NavLink to="/login" class="text-primary">
               Đăng nhập
             </NavLink>{" "}
             hoặc{" "}
@@ -160,7 +160,7 @@ export function NewfeedPage() {
             </div>
             <h4 class="PlaceName pt-4">Tìm kiếm theo địa điểm</h4>
             <div class="pt-4">
-              <OptionButtonGroup data={DataProvince} addressList={addressList}></OptionButtonGroup>
+              <OptionButtonGroup data={DataProvince} addressList={addressList} all={theData}></OptionButtonGroup>
             </div>
             <h4 class="PlaceName pt-4">Nổi bật</h4>
             <div class="pt-0">
