@@ -97,7 +97,7 @@ export function NewfeedPage() {
   var DataParkingOustanding = theData.filter((each)=>{
     return average(each.feedback.map((e)=>{
           return e.rate
-    })) >= 4.5
+    })) >= 4
   })
   var DataParkingOustandingfour = DataParkingOustanding.slice(0,4);
   var addressList = [];
