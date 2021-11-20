@@ -28,7 +28,7 @@ export function CostTable({param}) {
         return (
           <tr>
             <td>{typere(index)}</td>
-            <td>{each}</td>
+            <td>{Intl.NumberFormat().format(each)}</td>
           </tr>
         );
       })} 
