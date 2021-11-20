@@ -8,105 +8,106 @@ import { removeVI, DefaultOption } from "jsrmvi";
 class SearchingPage extends Component {
   constructor(props) {
     super(props);
-    this.flagleft  = false;
+    this.flagleft = false;
     this.flag = true;
-    this.last = []
-    this.arr = [false,false,false,false];
+    this.last = [];
+    this.arr = [false, false, false, false];
     this.count = props.Data.length;
     // Set initial state
-    this.state = { data: props.Data, };
+    this.state = { data: props.Data };
     this.count1 = 0;
     // this.handleClick = this.handleClick.bind(this);
     this.numParking = this.props.num;
     this.Num = 0;
     this.handleClickDown = this.handleClickDown.bind(this);
     this.handleClickUp = this.handleClickUp.bind(this);
-     this.hangdlezero = this.hangdlezero.bind(this);
-     this.hangdlefirst = this.hangdlefirst.bind(this);
-     this.hangdlesecond = this.hangdlesecond.bind(this);
-     this.hangdlethird = this.hangdlethird.bind(this);
-     this.handleAll = this.handleAll.bind(this);
+    this.handleXemay = this.handleXemay.bind(this);
+    this.handleOto1 = this.handleOto1.bind(this);
+    this.handleOto2 = this.handleOto2.bind(this);
+    this.handleOto3 = this.handleOto3.bind(this);
+    this.handleAll = this.handleAll.bind(this);
   }
-  hangdlezero(){
-    
-    
-    this.arr[0] = !this.arr[0]
+  handleXemay() {
+    this.arr[0] = !this.arr[0];
     this.handleAll();
-    
   }
-   uniq(a) {
+  uniq(a) {
     return a.sort().filter(function (item, pos, ary) {
       return !pos || item !== ary[pos - 1];
     });
   }
-  hangdlefirst(){
-    this.arr[1] = !this.arr[1]
+  handleOto1() {
+    this.arr[1] = !this.arr[1];
     this.handleAll();
-    
   }
-  hangdlesecond(){
-    this.arr[2]=!this.arr[2]
+  handleOto2() {
+    this.arr[2] = !this.arr[2];
     this.handleAll();
-    
   }
 
-  hangdlethird(){
-    this.arr[3]=!this.arr[3]
+  handleOto3() {
+    this.arr[3] = !this.arr[3];
     this.handleAll();
-    }
-        
-  handleAll(){
+  }
+
+  handleAll() {
     this.flagleft = true;
-    if (this.flag === true){
+    if (this.flag === true) {
       var ans = this.props.Data;
-      
-      var ans2= [];
-      for (let i in ans){
-        for (let j in ans[i].price){
-                if (ans[i].price[j]>0 && this.arr[j]){
-                  ans2.push(ans[i])
-                  break;
-                }
+
+      var ans2 = [];
+      for (let i in ans) {
+        for (let j in ans[i].price) {
+          if (ans[i].price[j] > 0 && this.arr[j]) {
+            ans2.push(ans[i]);
+            break;
+          }
         }
       }
-      ans2= this.uniq(ans2)
-       if (this.arr[0]===false && this.arr[1]===false && this.arr[2]===false && this.arr[3]===false){
-          this.setState({data: this.props.Data})
-          this.flagleft = false;
-       }
-      else {this.setState({data: ans2})}
-
-
-    }
-    else{
+      ans2 = this.uniq(ans2);
+      if (
+        this.arr[0] === false &&
+        this.arr[1] === false &&
+        this.arr[2] === false &&
+        this.arr[3] === false
+      ) {
+        this.setState({ data: this.props.Data });
+        this.flagleft = false;
+      } else {
+        this.setState({ data: ans2 });
+      }
+    } else {
       var ans = this.state.data;
-      var ans2= [];
-      
-      for (let i in ans){
-        for (let j in ans[i].price){
-                if (ans[i].price[j]>0 && this.arr[j]){
-                  ans2.push(ans[i])
-                  break;
-                }
+      var ans2 = [];
+
+      for (let i in ans) {
+        for (let j in ans[i].price) {
+          if (ans[i].price[j] > 0 && this.arr[j]) {
+            ans2.push(ans[i]);
+            break;
+          }
         }
       }
-      ans2= this.uniq(ans2)
-      if (this.arr[0]===false && this.arr[1]===false && this.arr[2]===false && this.arr[3]===false){
-        this.setState({data: this.props.Data})
-         this.flagleft = false;
-     }
-    else { 
-      
-      this.setState({data: ans2})}
+      ans2 = this.uniq(ans2);
+      if (
+        this.arr[0] === false &&
+        this.arr[1] === false &&
+        this.arr[2] === false &&
+        this.arr[3] === false
+      ) {
+        this.setState({ data: this.props.Data });
+        this.flagleft = false;
+      } else {
+        this.setState({ data: ans2 });
+      }
     }
   }
   handleClickDown() {
     this.flag = false;
-    var theData = []
-    if (this.flagleft === true){
+    var theData = [];
+    if (this.flagleft === true) {
       theData = this.state.data;
-    }
-    else{
+    } else {
       theData = this.props.Data;
     }
     theData = theData.sort(
@@ -129,21 +130,19 @@ class SearchingPage extends Component {
         theData.splice(i, 1);
       }
     }
-    
+
     this.setState({ data: theData });
   }
 
   handleClickUp() {
     this.flag = false;
-    var theData = []
-    if (this.flagleft === true){
+    var theData = [];
+    if (this.flagleft === true) {
       theData = this.state.data;
-    }
-    else{
+    } else {
       theData = this.props.Data;
     }
-     
-     
+
     theData = theData.sort(
       (a, b) =>
         this.average(
@@ -164,7 +163,7 @@ class SearchingPage extends Component {
         theData.splice(i, 1);
       }
     }
-    
+
     this.setState({ data: theData });
   }
 
@@ -193,25 +192,24 @@ class SearchingPage extends Component {
     return a;
   }
 
-  dem(){
-    this.count=0;
-    this.count1=0;
-    for (let i of this.state.data){
-
-      if (removeVI(i.province) === this.props.id){
-        this.count = this.count+1;
+  dem() {
+    this.count = 0;
+    this.count1 = 0;
+    for (let i of this.state.data) {
+      if (removeVI(i.province) === this.props.id) {
+        this.count = this.count + 1;
       }
     }
-    for (let i of this.props.Data){
-
-      if (removeVI(i.province) === this.props.id){
-        this.count1 = this.count1+1;
+    for (let i of this.props.Data) {
+      if (removeVI(i.province) === this.props.id) {
+        this.count1 = this.count1 + 1;
       }
     }
-    if(this.flagleft==0){
+    if (this.flagleft == 0) {
       return this.count1;
+    } else {
+      return this.count;
     }
-    else{return this.count}
   }
   render() {
     return (
@@ -226,7 +224,7 @@ class SearchingPage extends Component {
                 type="checkbox"
                 value=""
                 id="flexCheckDefault"
-                onClick={this.hangdlezero}
+                onClick={this.handleXemay}
                 check
               />
               <label class="form-check-label" for="flexCheckDefault">
@@ -239,7 +237,7 @@ class SearchingPage extends Component {
                 type="checkbox"
                 value=""
                 id="flexCheckChecked"
-                onClick= {this.hangdlefirst}
+                onClick={this.handleOto1}
                 check
               />
               <label class="form-check-label" for="flexCheckChecked">
@@ -252,11 +250,11 @@ class SearchingPage extends Component {
                 type="checkbox"
                 value=""
                 id="flexCheckChecked"
-                onClick= {this.hangdlesecond}
+                onClick={this.handleOto2}
                 check
               />
               <label class="form-check-label" for="flexCheckChecked">
-              Xe 9 - 16 chỗ
+                Xe 9 - 16 chỗ
               </label>
             </div>
             <div class="form-check">
@@ -264,7 +262,7 @@ class SearchingPage extends Component {
                 class="form-check-input"
                 type="checkbox"
                 value=""
-                onClick={this.hangdlethird}
+                onClick={this.handleOto3}
                 id="flexCheckChecked"
                 check
               />
@@ -273,7 +271,7 @@ class SearchingPage extends Component {
               </label>
             </div>
           </div>
-          
+
           {/* ////// */}
         </div>
         <div class="col">
@@ -283,8 +281,7 @@ class SearchingPage extends Component {
                 {this.props.name +
                   ": Đã tìm thấy " +
                   // this.Numparking +
-                  this.dem()
-                  +
+                  this.dem() +
                   " bãi đỗ xe"}
               </h3>
               <div class="pt-1">
@@ -338,8 +335,8 @@ class SearchingPage extends Component {
               </div>
               <div class="pt-4">
                 <div class="row">
-
-                {this.flag === true && this.flagleft === false &&
+                  {this.flag === true &&
+                    this.flagleft === false &&
                     this.props.Data.map((parking) => {
                       if (removeVI(parking.province) === this.props.id)
                         return (
@@ -369,7 +366,8 @@ class SearchingPage extends Component {
                           </div>
                         );
                     })}
-                  {this.flag === true && this.flagleft === true &&
+                  {this.flag === true &&
+                    this.flagleft === true &&
                     this.state.data.map((parking) => {
                       if (removeVI(parking.province) === this.props.id)
                         return (
@@ -399,7 +397,8 @@ class SearchingPage extends Component {
                           </div>
                         );
                     })}
-                { this.flag === false && this.flagleft === true &&
+                  {this.flag === false &&
+                    this.flagleft === true &&
                     this.state.data.map((parking) => {
                       if (removeVI(parking.province) === this.props.id)
                         return (
@@ -429,7 +428,8 @@ class SearchingPage extends Component {
                           </div>
                         );
                     })}
-                    { this.flag === false && this.flagleft === false &&
+                  {this.flag === false &&
+                    this.flagleft === false &&
                     this.state.data.map((parking) => {
                       if (removeVI(parking.province) === this.props.id)
                         return (
@@ -459,10 +459,6 @@ class SearchingPage extends Component {
                           </div>
                         );
                     })}
-                  
-                  
-
-           
                 </div>
               </div>
             </div>

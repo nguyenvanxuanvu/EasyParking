@@ -55,7 +55,7 @@ class ListReview extends Component {
       content: this.state.content,
     });
     
-    this.handleRating(0);
+    this.handleRating(1);
     
   }
   handleContent(value) {
@@ -132,7 +132,7 @@ class ListReview extends Component {
                 <Review
                   name={review.userName}
                   time={Moment(review.time).utcOffset('+07:00')
-                  .format('hh:mm DD/MM/YYYY')}
+                  .format('hh:mm a DD/MM/YYYY')}
                   star={review.rate}
                   content={review.content}
                   avasrc={
