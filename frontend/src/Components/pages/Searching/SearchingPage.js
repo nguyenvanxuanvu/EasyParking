@@ -12,6 +12,7 @@ class SearchingPage extends Component {
     this.flag = true;
     this.last = [];
     this.arr = [false, false, false, false];
+    this.sort = false;
     this.count = props.Data.length;
     // Set initial state
     this.state = { data: props.Data };
@@ -64,6 +65,8 @@ class SearchingPage extends Component {
           }
         }
       }
+      
+
       ans2 = this.uniq(ans2);
       if (
         this.arr[0] === false &&
@@ -78,6 +81,7 @@ class SearchingPage extends Component {
       }
     } else {
       var ans = this.state.data;
+      var ans1 = this.props.Data;
       var ans2 = [];
 
       for (let i in ans) {
@@ -88,7 +92,60 @@ class SearchingPage extends Component {
           }
         }
       }
+      for (let i in ans1) {
+        for (let j in ans1[i].price) {
+          if (ans1[i].price[j] > 0 && this.arr[j] && !ans2.includes(ans1[i])) {
+            ans2.push(ans1[i]);
+            break;
+          }
+        }
+      }
+
       ans2 = this.uniq(ans2);
+      if (this.sort === true){
+        ans2 = ans2.sort(
+          (a, b) =>
+            this.average(
+              a.feedback.map((e) => {
+                return e.rate;
+              })
+            ) -
+            this.average(
+              b.feedback.map((f) => {
+                return f.rate;
+              })
+            )
+        );
+    
+        for (let i in ans2) {
+          if (ans2[i].feedback.length === 0) {
+            ans2.push(ans2[i]);
+            ans2.splice(i, 1);
+          }
+        }
+      }
+      else {
+        ans2 = ans2.sort(
+          (a, b) =>
+            this.average(
+              b.feedback.map((e) => {
+                return e.rate;
+              })
+            ) -
+            this.average(
+              a.feedback.map((f) => {
+                return f.rate;
+              })
+            )
+        );
+    
+        for (let i in ans2) {
+          if (ans2[i].feedback.length === 0) {
+            ans2.push(ans2[i]);
+            ans2.splice(i, 1);
+          }
+        }
+      }
       if (
         this.arr[0] === false &&
         this.arr[1] === false &&
@@ -101,6 +158,7 @@ class SearchingPage extends Component {
         this.setState({ data: ans2 });
       }
     }
+
   }
   handleClickDown() {
     this.flag = false;
@@ -132,6 +190,8 @@ class SearchingPage extends Component {
     }
 
     this.setState({ data: theData });
+    this.sort = false;
+    this.last = theData;
   }
 
   handleClickUp() {
@@ -165,6 +225,8 @@ class SearchingPage extends Component {
     }
 
     this.setState({ data: theData });
+    this.sort = true;
+    this.last = theData;
   }
 
   get Numparking() {
