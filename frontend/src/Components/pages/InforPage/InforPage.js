@@ -28,8 +28,7 @@ export function InforPage({ Data }) {
   ];
   var idx = 0;
   var d = 0;
-  var pk;
-  var theid =''
+  
   var img = [];
   var price = [];
   var feedback = [];
@@ -92,7 +91,7 @@ export function InforPage({ Data }) {
                 <div className="new-line">{parking.description}</div>
               </div>
             </div>
-            <div class="col">
+            <div class="col-4 ps-5">
               <CostTable param={price} />
             </div>
           </div>
