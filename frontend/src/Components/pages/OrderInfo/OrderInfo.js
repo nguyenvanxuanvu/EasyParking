@@ -7,13 +7,13 @@ import Typography from '@mui/material/Typography';
 import { red, purple } from '@mui/material/colors';
 import { useParams } from 'react-router';
 import {orderData} from '../../../data';
-import {calDuration, FEE_INTERVAL, getOrderTotalPrice } from '../../../utils/OrderUtils';
+import {calDuration, FEE_INTERVAL, getOrderTotalPrice, toPrettyDateTime } from '../../../utils/OrderUtils';
 import { padLeadingZeros } from '../../../utils/CommonUtils';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Loading from '../Loading/Loading';
 
-const ORDER_STATUS_LABEL = ["gửi", "xác nhận", "đỗ xe", "lấy xe", "hoàn tất"]
+const ORDER_STATUS_LABEL = ["gửi", "xác nhận", "đỗ xe", "lấy xe và hoàn tất", "hủy"]
 const ORDER_STATUS_PREFIX = {
     active: "Đã",
     inactive: "Đang chờ"
@@ -22,6 +22,8 @@ const ORDER_STATUS_PREFIX = {
 function getOrderInfo(orderId) {
     return orderData.find(order => order.id == orderId)
 }
+
+
 
 export function OrderInfo() {
     const {id: ORDER_ID} = useParams();
@@ -55,7 +57,8 @@ export function OrderInfo() {
         }
         else {
             prefix = ORDER_STATUS_PREFIX.active;
-            label = label.concat(" ", "vào lúc", " ", new Date(time));
+            const date = new Date(time);
+            label = label.concat(" vào lúc ", toPrettyDateTime(date));
             activeStep = idx + 1;
             if(activeStep == ORDER_STATUS_LABEL.length) {
                 activeStep--;
@@ -66,11 +69,15 @@ export function OrderInfo() {
         }
     })
 
+    if(order.times[3]) {
+        activeStep = 3;
+    }
+
     return(
         <div class="container">
             <h3 class="my-3">Thông tin đơn hàng #{order._id}</h3>
             <div class="row mx-auto">
-                <div class="col-7">
+                <div class="col">
                     <div class="row mx-auto">
                         <div class="col-12 bg-secondary text-white p-2">
                             <span>Thông tin khách hàng</span>
@@ -95,26 +102,14 @@ export function OrderInfo() {
                         </div>
                         <div class="col-6">
                             <label>Gửi vào lúc</label>
-                            <input class="form-control" type="text" value={order.startTime} aria-label="readonly input example" readonly/>
+                            <input class="form-control" type="text" value={toPrettyDateTime(new Date(order.startTime))} aria-label="readonly input example" readonly/>
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Lấy vào lúc</label>
-                            <input class="form-control" type="text" value={order.endTime} aria-label="readonly input example" readonly/>
+                            <label>Lấy vào lúc</label>
+                            <input class="form-control" type="text" value={toPrettyDateTime(new Date(order.endTime))} aria-label="readonly input example" readonly/>
                         </div>
                     </div>
   
-                </div>
-                <div class="col">
-                    <div class="row mx-auto">
-                        <div class="col-12 bg-secondary text-white p-2">
-                            <span>Ghi chú</span>
-                        </div>
-                    </div>
-                    <div class="row mx-auto border py-2">
-                        <div class="col-12">
-                                <textarea class="form-control" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat" rows="5"></textarea>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="row mx-auto mt-3">

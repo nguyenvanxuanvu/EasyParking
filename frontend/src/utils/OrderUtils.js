@@ -1,4 +1,4 @@
-const ORDER_STATUS_LABEL = ["gửi", "xác nhận", "đỗ xe", "lấy xe", "hoàn tất"]
+const ORDER_STATUS_LABEL = ["gửi", "xác nhận", "đỗ xe", "hoàn tất", "hủy"]
 const ORDER_STATUS_PREFIX = {
     active: "Đã",
     inactive: "Đang chờ"
@@ -27,20 +27,40 @@ export function getOrderStatus(order) {
     if(seek == ORDER_STATUS_LABEL.length) {
         return ORDER_STATUS_PREFIX.active + " " + ORDER_STATUS_LABEL[seek - 1];
     }
+    else if(seek == ORDER_STATUS_LABEL.length - 1) 
+        return ORDER_STATUS_PREFIX.active + " " + ORDER_STATUS_LABEL[seek - 1];
     else {
         return ORDER_STATUS_PREFIX.inactive + " " + ORDER_STATUS_LABEL[seek];
     }
 }
 export function isCompleted(order) {
-    if(order.times[order.times.length - 1]) return true;
+    if(order.times[order.times.length - 2] || order.times[order.times.length - 1]) return true;
     else return false;
 }
 export function compareOrder(a, b) {
-    let aWeight = a.times.filter(element => element != "").length;
-    let bWeight = b.times.filter(element => element != "").length;
-    if(aWeight > bWeight) return 1;
-    else if(a < b) return -1;
-    else return 0;
+    // let aWeight = a.times.filter(element => element).length;
+    // let bWeight = b.times.filter(element => element).length;
+    a = JSON.parse(JSON.stringify(a));
+    b = JSON.parse(JSON.stringify(b));
+    let aWeight = a.times.reverse().findIndex(element => element);
+    let bWeight = b.times.reverse().findIndex(element => element);
+    // if(a.times[a.times.length - 1]) return 1;
+
+    // if(b.times[b.times.length - 1]) return -1;
+
+    // if(a.times[a.times.length - 2]) return 1;
+
+    // if(b.times[b.times.length - 2]) return -1;
+
+    if(aWeight < bWeight) return 1;
+
+    if(aWeight > bWeight) return -1;
+
+    if(aWeight == bWeight) {
+        return (a.times[0] < b.times[0] ? -1 : 1);
+    }
+    
+    return 0;
 }
 
 export function vehiclesToString(vehicles) {
@@ -50,4 +70,8 @@ export function vehiclesToString(vehicles) {
 export function countVehicles(vehicles) {
     let quantityList = vehicles.map(vehicle => vehicle.quantity);
     return quantityList.reduce((pre, cur) => pre + cur);
+}
+
+export function toPrettyDateTime(date) {
+    return `${date.toLocaleTimeString()} ngày ${date.toLocaleDateString()}`;
 }

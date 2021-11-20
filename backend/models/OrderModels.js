@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const OrderSchema = new mongoose.Schema({
   times: {
     type: [Date],
-    default: [Date.now(), null, null, null, null]
+    default: [new Date(), null, null, null, null]
   },
   customer: {
     type: { 

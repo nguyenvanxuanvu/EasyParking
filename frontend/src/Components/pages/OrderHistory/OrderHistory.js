@@ -1,7 +1,7 @@
 import { OrderCard } from './OrderCard';
 import { Link } from 'react-router-dom';
 import {orderData} from '../../../data';
-import { getOrderStatus, getOrderTotalPrice, isCompleted, compareOrder } from '../../../utils/OrderUtils';
+import { getOrderStatus, getOrderTotalPrice, isCompleted, compareOrder, toPrettyDateTime } from '../../../utils/OrderUtils';
 import { padLeadingZeros } from '../../../utils/CommonUtils';
 import axios from "axios";
 import {useState, useEffect} from "react";
@@ -37,7 +37,7 @@ export function OrderHistory() {
         <div class="order-history-content container">
             <h3 class="my-3">Lịch sử đặt bãi</h3>
             <div class="order-card-list row">
-                {orderList.map((order) => {
+                {orderList.sort(compareOrder).map((order) => {
                     if(!isCompleted(order)) {
                         return <OrderCard order={order}/>
                     }
@@ -61,7 +61,7 @@ export function OrderHistory() {
                         return(
                             <tr>
                                 <th scope="row"><Link to={"/account/order-info/" + order._id} target="_blank">#{order._id}</Link></th>
-                                <td>{order.times[0]}</td>
+                                <td>{toPrettyDateTime(new Date(order.times[0]))}</td>
                                 <td>{order.parking.name}</td>
                                 <td>{Intl.NumberFormat().format(getOrderTotalPrice(order.vehicles, order.startTime, order.endTime))}</td>
                                 <td>{getOrderStatus(order)}</td>

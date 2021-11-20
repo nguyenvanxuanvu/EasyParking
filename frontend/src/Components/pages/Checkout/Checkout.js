@@ -3,7 +3,7 @@ import axios from "axios";
 import {calDuration, FEE_INTERVAL} from "../../../utils/OrderUtils";
 import { useHistory, useParams } from 'react-router';
 
-export function CartItemDetail() {
+export function Checkout() {
 
     var history = useHistory();
     const VEHICLE_LABEL = ["Xe máy", "Xe ô tô 4-7 chỗ", "Xe 16 chỗ", "Xe 32 chỗ"];

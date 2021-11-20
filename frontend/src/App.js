@@ -18,7 +18,7 @@ import { OrderInfo } from './Components/pages/OrderInfo/OrderInfo';
 import { orderData } from './data';
 import { Cart } from './Components/pages/Cart/Cart';
 import { Account } from './Components/pages/Account/Account';
-import { CartItemDetail } from './Components/pages/CartItemDetail/CartItemDetail';
+import { Checkout } from './Components/pages/Checkout/Checkout';
 import { NewfeedPage } from './Components/pages/Newfeed/NewfeedPage';
 import AllSearchingPage  from './Components/pages/Searching/AllSearchingPage'
 import  AllInforPage  from './Components/pages/InforPage/AllInforPage';
@@ -60,7 +60,7 @@ function App() {
                         <Route exact path='/Info/:id' children={<AllInforPage />} />
                         <Route exact path="/Info" component={AllInforPage}/> 
                         <Route exact path="/cart" component={Cart}/>
-                        <Route exact path="/checkout/:parkingId" render={props => auth ? <CartItemDetail/> : <Login auth={auth} setAuth={setAuth}/>}/>
+                        <Route exact path="/checkout/:parkingId" render={props => auth ? <Checkout/> : <Login auth={auth} setAuth={setAuth}/>}/>
                         <Route path="/account" render={props => auth ? <Account setAuth={setAuth}/> : <Login auth={auth} setAuth={setAuth}/>}/>
                         <Route path="/payment/success" component={PaymentSuccess}/>
                         <Route path="/payment/fail" component={PaymentFail}/>
