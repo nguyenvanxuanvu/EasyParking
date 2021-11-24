@@ -97,7 +97,7 @@ export function TabContent(props) {
         var time = new Date(orderTime);
         time.setDate(time.getDate() + 1);
         var t = time.getTime() - new Date().getTime();
-
+        var resT = t;
         var days, hours;
         var res;
         if (t <= 0) {
@@ -119,7 +119,7 @@ export function TabContent(props) {
             res = "Hạn xác nhận còn " + days + " ngày " + hours + " giờ, từ " + time.getHours() + "h" + time.getMinutes() + " "
                 + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear();
         }
-        return [res, t];
+        return [res, resT];
     }
 
     // startTime
@@ -127,7 +127,7 @@ export function TabContent(props) {
         var time = new Date(startTime);
         // time.setHours(time.getHours() - 7);
         var t = time.getTime() - new Date().getTime();
-
+        var resT = t;
         var days, hours;
         var res;
         if (t <= 0) {
@@ -149,7 +149,7 @@ export function TabContent(props) {
             res = "Thời gian đến lúc đỗ là " + days + " ngày " + hours + " giờ, từ " + time.getHours() + "h" + time.getMinutes() + " "
                 + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear();
         }
-        return [res, t];
+        return [res, resT];
     }
 
     // endTime
@@ -157,7 +157,7 @@ export function TabContent(props) {
         var time = new Date(endTime);
         // time.setHours(time.getHours() - 7);
         var t = time.getTime() - new Date().getTime();
-
+        var resT = t;
         var days, hours;
         var res;
         if (t <= 0) {
@@ -179,7 +179,7 @@ export function TabContent(props) {
             res = "Thời gian đỗ còn " + days + " ngày " + hours + " giờ, đến " + time.getHours() + "h" + time.getMinutes() + " "
             + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear();
         }
-        return [res,t];
+        return [res,resT];
     }
 
     // times[3]
