@@ -134,12 +134,20 @@ export function TopBarSearch({ auth, setAuth, Data }) {
                   {filteredDataProvince.slice(0, 2).map((value, key) => {
                     return (
                       <NavLink to={"/Searching/"+ removeVI(value)} class="text-decoration-none text-secondary " onClick={clearInput}>
-                        
+                        <div class="row">
+                    <div class="col-auto pt-2">
                         <p style={{fontWeight: 500}}>
                           {value}{" "}
                         </p>
                         
+                        </div>
+                    <div class="col-auto">
+                    <span class="badge rounded-pill bg-secondary">Địa điểm</span>
+                    
+                    </div>
+                    </div>
                       </NavLink>
+                      
                     );
                   })}
                   </div>
@@ -156,7 +164,8 @@ export function TopBarSearch({ auth, setAuth, Data }) {
               {filteredData.slice(0, 4).map((value, key) => {
                 return (
                   <NavLink to={"/Info/" + value._id} class="text-decoration-none text-secondary " onClick={clearInput}>
-                   
+                   <div class="row">
+                    <div class="col-auto pt-2">
                     <p style={{fontWeight: 500}}>
                       {value.name +
                         ", " +
@@ -166,6 +175,11 @@ export function TopBarSearch({ auth, setAuth, Data }) {
                         ", " +
                         value.province}{" "}
                     </p>
+                    </div>
+                    <div class="col-auto">
+                    <span style={{color: "black"}} class="badge rounded-pill bg-primary">Bãi đỗ</span>
+                    </div>
+                    </div>
                   </NavLink>
                 );
               })
