@@ -5,6 +5,8 @@ import {
     Link
 } from 'react-router-dom';
 import './AddParkingForm.css';
+import { IoAddSharp } from 'react-icons/io5';
+import { GrFormSubtract } from 'react-icons/gr';
 
 const listPos = require('./locationData.json');
 
@@ -19,7 +21,7 @@ export default class AddParkingForm extends Component {
             cbCity: '',
             cbDistrict: '',
             cbWard: '',
-            uplImg: [],
+            uplImg: [''],
             txtPr_xemay: '',
             txtPr_4_7: '',
             txtPr_9_16: '',
@@ -68,24 +70,21 @@ export default class AddParkingForm extends Component {
         }
     }
 
+    onChangeImg = (event, index) => {
+        const values = [...this.state.uplImg];
+        values[index] = event.target.value;
+        this.setState({uplImg:values});
+        console.log(this.state.uplImg);
+    }
+
     onHandleChange = (event) => {
         var target = event.target;
         var name = target.name;
         var value = target.value;
 
-        if (target.name === "uplImg") {
-            this.setState((prev) => ({
-                uplImg: [value] // [...prev.uplImg, value]
-            }));
-        }
-        else {
-            this.setState({
-                [name]: value
-            });
-        }
-        // this.setState({
-        //     [name]: value
-        // });
+        this.setState({
+            [name]: value
+        });
 
         if (target.name === 'cbCity') {
             this.ward = this.renderWard('');
@@ -196,7 +195,24 @@ export default class AddParkingForm extends Component {
                     <label for="formGroupExampleInput" class="form-label">Ảnh minh họa</label>
                     <br />
                     <ul class="list-group">
-                        <li class="list-group-item"><input name="uplImg" onChange={this.onHandleChange} type="text" class="form-control" id="formGroupExampleInput"/></li>
+                        {this.state.uplImg.map((img, index) => {
+                            return (
+                                <li class="list-group-item">
+                                    <div className="col-auto d-flex align-items-center">
+                                        <input name="uplImg" value={img} onChange={e => this.onChangeImg(e,index)} type="text" class="form-control" id="formGroupExampleInput" />
+                                        <button class="icon-btn" 
+                                            onClick={() =>{
+                                                if(this.state.uplImg.length===1) return;
+                                                const values = [...this.state.uplImg];
+                                                values.splice(index,1);
+                                                this.setState({uplImg:values});
+                                            }}>-</button>
+                                        <button class="icon-btn"
+                                            onClick={() => this.setState({uplImg:[...this.state.uplImg, '']})}>+</button>
+                                    </div>
+                                </li>
+                            )
+                        })}
                     </ul>
                 </div>
                 <br />
