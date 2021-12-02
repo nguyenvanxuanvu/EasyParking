@@ -351,7 +351,7 @@ export function TabContent(props) {
                                 {checkTime(order[1])}
                             </td>
                             <td>{displayInfo(order[1]?.quantity, 'html')}</td>
-                            <td className="total-money">{totalPrice(order[1]?.price, order[1]?.quantity, Math.ceil(calDuration(order[1]?.startTime, order[1]?.endTime) / FEE_INTERVAL))} VNĐ</td>
+                            <td className="total-money">{Intl.NumberFormat().format(totalPrice(order[1]?.price, order[1]?.quantity, Math.ceil(calDuration(order[1]?.startTime, order[1]?.endTime) / FEE_INTERVAL)))} VNĐ</td>
                         </tr>
                     );
             }
