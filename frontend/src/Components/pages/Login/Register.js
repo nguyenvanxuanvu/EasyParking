@@ -1,9 +1,35 @@
 import React from 'react'
 import Button from "./Button"
 import { Link } from 'react-router-dom';
-import './accInt.css'
+import './accInt.css';
+import { useState } from 'react';
+import axios from 'axios';
 
 const Register = () => {
+    var email = ""
+    var displayName = ""
+    var phone = ""
+    var userName = null
+    var pwd = null
+
+    function register(e) {
+        e.preventDefault();
+        axios.post("http://localhost:8000/user/add-user", 
+        {
+            userName: userName,
+            password: pwd,
+            displayName: displayName,
+            email: email,
+            phone: phone
+        })
+        .then(res => {
+            alert("Đăng ký thành công");
+            window.location.href = "/login";
+        })
+        .catch(err => {
+            alert(err);
+        })
+    }
     return (
         <div className='loginContainer'>
             <form>
@@ -13,37 +39,27 @@ const Register = () => {
 
                 <div className='inputBlock'>                                      
                         <label className='labelForm'><span className='star'>*</span>Địa chỉ Email</label>                           
-                        <input required type='email' />                  
+                        <input required type='email' class="form-control" onChange={(event) => email = event.target.value}/>                  
                 </div>
                 <div className='inputBlock'>                    
                         <label className='labelForm'><span className='star'>*</span>Số điện thoại</label>                             
-                        <input required type='tel' />                  
+                        <input required type='tel' class="form-control" onChange={(event) => phone = event.target.value} />                  
                 </div>
                 <div className='inputBlock'>                   
                         <label className='labelForm'><span className='star'>*</span>Họ và tên</label>
-                        <input required type='text' />                    
+                        <input required type='text' class="form-control" onChange={(event) => displayName = event.target.value}/>                    
+                </div>
+                <div className='inputBlock'>          
+                        <label className='labelForm'><span className='star'>*</span>Tên đăng nhập</label>               
+                        <input required type='text' class="form-control" onChange={(event) => userName = event.target.value}/>                
                 </div>
                 <div className='inputBlock'>                   
                         <label className='labelForm'><span className='star'>*</span>Mật khẩu</label>                                  
-                        <input required type='password' />               
-                </div>
-                <div className='inputBlock'>          
-                        <label className='labelForm'><span className='star'>*</span>Xác nhận mật khẩu</label>               
-                        <input required type='password' />                
-                </div>
-
-                <div className='checkbox addMargin'>
-                    <input required type='checkbox' />
-                    <div>
-                        <p>Tôi đồng ý với
-                            <span><a href='' className='star'>Bảo mật và Điều khoản hoạt động của
-                                EasyParking.</a> </span>
-                        </p>
-                    </div>
+                        <input required type='password' class="form-control" onChange={(event) => pwd = event.target.value}/>               
                 </div>
 
                 <div className='center addMargin'>
-                    <Button text='Đăng ký' type='submit' />
+                    <Button text='Đăng ký' type='submit' onClick={register} />
                 </div>
 
             </form>

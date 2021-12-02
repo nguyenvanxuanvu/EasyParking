@@ -1,4 +1,6 @@
-import {AiOutlineHome} from 'react-icons/ai';
+import {AiOutlineHistory, AiFillCar} from 'react-icons/ai';
+import {BsFillPersonFill} from 'react-icons/bs';
+import {CgNotes} from 'react-icons/cg';
 import React, { useState } from 'react';
 import './Sidebar.css'
 import {Link} from 'react-router-dom';
@@ -6,27 +8,22 @@ import {Link} from 'react-router-dom';
 export const SidebarDatas = [
 {
     title: "Thông tin cá nhân",
-    icon: <AiOutlineHome/>,
+    icon: <BsFillPersonFill/>,
     link: "/account/user-info"
 },
 {
-    title: "Thông báo",
-    icon: <AiOutlineHome/>,
-    link: "/account/notification"
-},
-{
     title: "Lịch sử đặt bãi",
-    icon: <AiOutlineHome/>,
+    icon: <AiOutlineHistory/>,
     link: "/account/order-history"
 },
 {
     title: "Quản lý đơn hàng",
-    icon: <AiOutlineHome/>,
+    icon: <CgNotes/>,
     link: "/account/order-management"
 },
 {
     title: "Quản lý bãi đỗ",
-    icon: <AiOutlineHome/>,
+    icon: <AiFillCar/>,
     link: "/account/parking-management"
 }
 ]

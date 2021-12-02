@@ -11,5 +11,10 @@ module.exports = {
     const userExist = await UserModel.exists({ $and: [{userName: userName}, {password: password}]});
     console.log(userExist)
     return userExist;
+  },
+
+  getUserInfo: async(userName) => {
+    const userInfo = await UserModel.findOne({userName: userName});
+    return userInfo;
   }
 }

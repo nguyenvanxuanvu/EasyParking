@@ -56,9 +56,9 @@ export function compareOrder(a, b) {
 
     if(aWeight > bWeight) return -1;
 
-    if(aWeight == bWeight) {
-        return (a.times[0] < b.times[0] ? -1 : 1);
-    }
+ 
+    return (new Date(a.times[0]) < new Date(b.times[0]) ? 1 : -1);
+    
     
     return 0;
 }

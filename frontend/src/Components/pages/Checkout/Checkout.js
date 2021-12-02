@@ -55,6 +55,8 @@ export function Checkout() {
                 phone: phone,
                 email: email
             },
+            paymentMethod: (onlinePayment ? "Thanh toán online" : "Thanh toán tại chỗ"),
+            times: [new Date(), null, null, null, null],
             startTime: startTime,
             endTime: endTime,
             price: price,

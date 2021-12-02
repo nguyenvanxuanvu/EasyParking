@@ -23,7 +23,9 @@ function getOrderInfo(orderId) {
     return orderData.find(order => order.id == orderId)
 }
 
-
+function canCancel(times) {
+    return (!times[2] && !times[3] && !times[4]);
+}
 
 export function OrderInfo() {
     const {id: ORDER_ID} = useParams();
@@ -72,7 +74,15 @@ export function OrderInfo() {
     if(order.times[3]) {
         activeStep = 3;
     }
-
+    function cancel() {
+        var newTime = JSON.parse(JSON.stringify(order.times));
+        newTime[4] = new Date();
+        axios.put("/order/change-state/" + ORDER_ID, newTime)
+        .then(() => {
+            alert("Cancel successfully");
+            window.location.href = "/account/order-history";
+        })
+    }
     return(
         <div class="container">
             <h3 class="my-3">Thông tin đơn hàng #{order._id}</h3>
@@ -163,6 +173,14 @@ export function OrderInfo() {
                     ))}
                 </Stepper>
             </div>
+            {canCancel(order.times) ? 
+                <div class="row mt-5">
+                    <div class="col-auto">
+                        <button class="btn btn-secondary" onClick={cancel}>Hủy đơn hàng</button>
+                    </div>
+                </div>
+            : ""
+            }
         </div>
     )
 }

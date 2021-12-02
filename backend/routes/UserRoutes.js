@@ -30,4 +30,15 @@ router.post("/authenticate", async function (req, res) {
     }
 });
 
+router.get("/info/:userName", async function(req, res) {
+    console.log("GET user info");
+    try {
+        const userInfo = await UserService.getUserInfo(req.params.userName);
+        res.status(200).send(userInfo);
+    }
+    catch(error) {
+        res.status(500).send(error);
+    }
+})
+
 module.exports = router;

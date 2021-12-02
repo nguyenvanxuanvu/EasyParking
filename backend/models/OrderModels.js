@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const OrderSchema = new mongoose.Schema({
   times: {
     type: [Date],
-    default: [new Date(), null, null, null, null]
+    default: [() => new Date(), null, null, null, null]
   },
   customer: {
     type: { 
@@ -14,7 +14,7 @@ const OrderSchema = new mongoose.Schema({
     },
     required: true,
   },
-  note: String,
+  paymentMethod: String,
   startTime: {
     type: Date,
     required: true

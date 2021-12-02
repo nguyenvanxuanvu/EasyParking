@@ -55,7 +55,7 @@ function App() {
                         <Route exact path="/" render={props => <NewfeedPage/>}/>
                         <Route exact path="/login" render={props => auth ? <NewfeedPage/> : <Login auth={auth} setAuth={setAuth}/>}/>
  
-                        <Route exact path="/SignUp" component={Register}/>
+                        <Route exact path="/SignUp" render={props => auth ? <NewfeedPage/> : <Register/>}/>
                         <Route exact path="/forgetPass" component={ForgetPass}/>
                         <Route exact path="/Searching/:id" component={AllSearchingPage}/>
                         <Route exact path='/Info/:id' children={<AllInforPage />} />
