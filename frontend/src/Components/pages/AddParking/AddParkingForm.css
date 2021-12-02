@@ -69,3 +69,14 @@ select .form-select option{
 th {
     text-align: left;
 }
+
+.icon-btn{
+    margin-bottom: 20px;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border: 0;
+    font-weight: bold;
+    font-size: 30px;
+    color: #211931;
+}

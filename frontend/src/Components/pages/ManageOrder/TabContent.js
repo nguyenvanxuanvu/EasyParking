@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { removeVI, DefaultOption } from "jsrmvi";
+import {calDuration,FEE_INTERVAL} from '../../../utils/OrderUtils';
 import Button from '../../Button';
 import './TabContent.css';
 
@@ -278,10 +279,10 @@ export function TabContent(props) {
         });
     }
 
-    let totalPrice = (price, quan) => {
+    let totalPrice = (price, quan, time) => {
         var sum = 0;
         price?.map((ele, index) => {
-            sum += ele * quan[index];
+            sum += ele * quan[index] * time;
         })
         return sum;
     }
@@ -323,7 +324,7 @@ export function TabContent(props) {
                         if (text.replace(/\s/g, '').search(filterValue) >= 0) res.push(order);
                         break;
                     case 'Tổng tiền':
-                        var text = removeVI(totalPrice(order[1]?.price, order[1]?.quantity).toString(), { replaceSpecialCharacters: false });
+                        var text = removeVI(totalPrice(order[1]?.price, order[1]?.quantity, Math.ceil(calDuration(order[1]?.startTime, order[1]?.endTime) / FEE_INTERVAL)).toString(), { replaceSpecialCharacters: false });
                         if (text.replace(/\s/g, '').search(filterValue) >= 0) res.push(order);
                         break;
                 }
@@ -350,7 +351,7 @@ export function TabContent(props) {
                                 {checkTime(order[1])}
                             </td>
                             <td>{displayInfo(order[1]?.quantity, 'html')}</td>
-                            <td className="total-money">{totalPrice(order[1]?.price, order[1]?.quantity)} VNĐ</td>
+                            <td className="total-money">{totalPrice(order[1]?.price, order[1]?.quantity, Math.ceil(calDuration(order[1]?.startTime, order[1]?.endTime) / FEE_INTERVAL))} VNĐ</td>
                         </tr>
                     );
             }
