@@ -131,7 +131,7 @@ export default class AddParkingForm extends Component {
                 "userName": this.USER_NAME
             };
             axios.post('/parking/add-parking', postData)
-                .then(() => window.location.href = 'http://localhost:3000/account/parking-management')
+                .then(() => window.location.href = '/account/parking-management')
                 .catch((err) => console.log(err));
         }
         else {

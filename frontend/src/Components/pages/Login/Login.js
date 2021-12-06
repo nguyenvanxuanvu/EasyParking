@@ -14,7 +14,7 @@ export default function Login({auth, setAuth}) {
         e.preventDefault();
         console.log(userName);
         console.log(pwd);
-        axios.post("http://localhost:8000/user/authenticate", 
+        axios.post("/user/authenticate", 
         {
             userName: userName,
             password: pwd

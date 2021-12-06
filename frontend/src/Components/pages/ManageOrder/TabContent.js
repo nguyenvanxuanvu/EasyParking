@@ -370,7 +370,7 @@ export function TabContent(props) {
         let res = order?.times;
         for (var i = 0; i < 4; i++) {
             if (!res[i]) {
-                res[i] = new Date().toLocaleString();
+                res[i] = new Date();
                 break;
             }
         }
@@ -391,7 +391,7 @@ export function TabContent(props) {
     let cancelOrder = (order) => {
         let res = order?.times;
         if(!res[4]){
-            res[4] = new Date().toLocaleString();
+            res[4] = new Date();
             return res;
         }
         return '';

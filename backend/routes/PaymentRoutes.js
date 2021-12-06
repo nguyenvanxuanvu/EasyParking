@@ -19,19 +19,10 @@ router.post('/process', (req, res) => {
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:8000/payment/success",
+            "return_url": "http://localhost:8000/pay/success",
             "cancel_url": "https://www.paypal.com/us/home"
         },
         "transactions": [{
-            // "item_list": {
-            //     "items": [{
-            //         "name": "Redhock Bar Soap",
-            //         "sku": "001",
-            //         "price": "25.00",
-            //         "currency": "USD",
-            //         "quantity": 1
-            //     }]
-            // },
             "amount": {
                 "currency": "USD",
                 "total": req.body.amount
@@ -43,7 +34,7 @@ router.post('/process', (req, res) => {
     paypal.payment.create(create_payment_json, function (error, payment) {
         if (error) {
             console.log(error);
-            res.redirect("http://localhost:3000/payment/fail");
+            res.redirect("http://localhost:3000/pay/fail");
         } else {
             for (let i = 0; i < payment.links.length; i++) {
                 if (payment.links[i].rel === 'approval_url') {
@@ -67,10 +58,10 @@ router.get('/success', (req, res) => {
         //When error occurs when due to non-existent transaction, throw an error else log the transaction details in the console then send a Success string reposponse to the user.
         if (error) {
             console.log(error.response);
-            res.redirect("http://localhost:3000/payment/fail");
+            res.redirect("http://localhost:3000/pay/fail");
         } else {
             console.log(JSON.stringify(payment));
-            res.redirect("http://localhost:3000/payment/success");
+            res.redirect("http://localhost:3000/pay/success");
         }
     });
 });

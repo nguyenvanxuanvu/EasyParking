@@ -22,7 +22,7 @@ export function Checkout() {
     const {parkingId: PARKING_ID} = useParams();
 
     useEffect(() => {
-        axios.get("http://localhost:8000/parking/" + PARKING_ID)
+        axios.get("/parking/" + PARKING_ID)
         .then(res => {
             console.log("okk");
             setParking(res.data);
@@ -49,7 +49,7 @@ export function Checkout() {
             return;
         }
 
-        axios.post("http://localhost:8000/order/add-order", {
+        axios.post("/order/add-order", {
             customer: {
                 name: customerName,
                 phone: phone,
@@ -72,9 +72,9 @@ export function Checkout() {
             alert(err);
         });
         if(onlinePayment) {
-            axios.post("http://localhost:8000/payment/process", {
+            axios.post("/payment/process", {
                 amount: (TOTAL / 23000).toFixed(1),
-                description: parking.name
+                description: [parking.name, customerName, phone].join(" | ")
             })
             .then(res => {
                 window.open(res.data, "_blank");

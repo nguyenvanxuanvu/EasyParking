@@ -63,8 +63,8 @@ function App() {
                         <Route exact path="/cart" component={Cart}/>
                         <Route exact path="/checkout/:parkingId" render={props => auth ? <Checkout/> : <Login auth={auth} setAuth={setAuth}/>}/>
                         <Route path="/account" render={props => auth ? <Account setAuth={setAuth}/> : <Login auth={auth} setAuth={setAuth}/>}/>
-                        <Route path="/payment/success" component={PaymentSuccess}/>
-                        <Route path="/payment/fail" component={PaymentFail}/>
+                        <Route path="/pay/success" component={PaymentSuccess}/>
+                        <Route path="/pay/fail" component={PaymentFail}/>
                     </Switch>
                 </div>
             </div>

@@ -14,7 +14,7 @@ const Register = () => {
 
     function register(e) {
         e.preventDefault();
-        axios.post("http://localhost:8000/user/add-user", 
+        axios.post("/user/add-user", 
         {
             userName: userName,
             password: pwd,
@@ -65,7 +65,7 @@ const Register = () => {
             </form>
 
             <div className='center addMargin'>
-                <p>Bạn đã có tài khoản EasyParking? <span><Link to='signIn' className='star'>Đăng nhập</Link> </span> </p>
+                <p>Bạn đã có tài khoản EasyParking? <span><Link to='login' className='star'>Đăng nhập</Link> </span> </p>
             </div>
 
         </div>

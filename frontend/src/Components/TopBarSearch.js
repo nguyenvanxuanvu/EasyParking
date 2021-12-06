@@ -97,7 +97,7 @@ export function TopBarSearch({ auth, setAuth, Data }) {
             :
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="/login">Đăng nhập</a></li>
-              <li><a class="dropdown-item" href="#">Đăng ký</a></li>
+              <li><a class="dropdown-item" href="/signUp">Đăng ký</a></li>
             </ul>
           }
 
